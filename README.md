@@ -117,8 +117,8 @@ A minimal NES program template is available in the [`template/`](template/) dire
 
 ```bash
 cd template
-make          # Build bootstrap.nes
-make run      # Run in emulator
+make          # Build template.nes
+make run      # Run in FCEUX
 make clean    # Clean build files
 ```
 

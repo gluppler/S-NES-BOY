@@ -170,7 +170,15 @@ Official and authoritative resources for NES programming and development.
 
 - **FCEUX**
   - URL: https://github.com/TASVideos/fceux
-  - Description: NES/Famicom emulator with debugging tools.
+  - Repository: https://github.com/TASVideos/fceux
+  - Official Website: https://fceux.com/web/home.html
+  - Documentation: https://github.com/TASVideos/fceux/wiki
+  - User Guide: https://github.com/TASVideos/fceux/wiki/UserGuide
+  - Command Line Options: https://github.com/TASVideos/fceux/wiki/CommandLineOptions
+  - PPU Viewer Documentation: Available in emulator (Tools → PPU Viewer)
+  - Lua Scripting: https://github.com/TASVideos/fceux/wiki/LuaScripting
+  - Debugging Features: Breakpoints, memory viewer, CPU state, PPU state, trace logger
+  - Description: NES/Famicom emulator with comprehensive debugging tools, PPU viewer, memory viewer, breakpoints, and Lua scripting support. Supports both GUI and command-line operation.
 
 - **Nestopia UE**
   - URL: https://github.com/0ldsk00l/nestopia

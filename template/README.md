@@ -1,4 +1,4 @@
-# NES Bootstrap Template
+# NES Template
 
 A minimal, working NES program template ready for immediate use. This template provides a complete foundation for NES development with proper initialization, NMI handling, and frame synchronization.
 
@@ -25,7 +25,7 @@ This template includes:
 
 - **ca65** - 6502 assembler (part of cc65)
 - **ld65** - Linker (part of cc65)
-- **NES emulator** - Mesen2, FCEUX, or compatible
+- **FCEUX** - NES emulator
 
 ### Installation
 
@@ -53,7 +53,7 @@ sudo make install
    ```bash
    make
    ```
-   This creates `bootstrap.nes`
+   This creates `template.nes`
 
 2. **Run in emulator:**
    ```bash
@@ -61,7 +61,7 @@ sudo make install
    ```
    Or manually:
    ```bash
-   mesen bootstrap.nes
+   fceux template.nes
    ```
 
 3. **Clean build files:**

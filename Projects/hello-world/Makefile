@@ -1,14 +1,14 @@
 # ============================================================================
-# NES Template Build System
+# NES Hello World Build System
 # ============================================================================
-# Build system for NES template
+# Build system for Hello World NES program
 # Follows NES documentation best practices
 #
 # Requirements:
 #   - ca65 (assembler, part of cc65)
 #   - ld65 (linker, part of cc65)
 #   - Python 3 (for verify target only)
-#   - FCEUX (NES emulator)
+#   - FCEUX or compatible NES emulator
 # ============================================================================
 
 # Toolchain
@@ -19,7 +19,7 @@ CFG = nes.cfg
 # Source files
 SOURCES = main.s
 OBJECTS = $(SOURCES:.s=.o)
-TARGET = template.nes
+TARGET = hello-world.nes
 
 # Phony targets
 .PHONY: all clean distclean run verify help
@@ -32,13 +32,14 @@ TARGET = template.nes
 all: $(TARGET)
 
 # Build object files from assembly source
-%.o: %.s
+# Dependencies: main.s requires chars_data.s (included via .include)
+%.o: %.s chars_data.s
 	@echo "Assembling $<..."
 	$(AS) $< -o $@
 
 # Link ROM from object files
-# Dependencies: object files, linker config, and CHR ROM file
-$(TARGET): $(OBJECTS) $(CFG) chars.chr
+# Dependencies: object files, linker config, and CHR data
+$(TARGET): $(OBJECTS) $(CFG) chars_data.s
 	@echo "Linking $(TARGET)..."
 	$(LD) -C $(CFG) -o $(TARGET) $(OBJECTS)
 	@if [ -f $(TARGET) ]; then \
@@ -99,10 +100,10 @@ verify: $(TARGET)
 	@python3 -c "import sys; rom = open('$(TARGET)', 'rb').read(); \
 		print(f'ROM size: {len(rom)} bytes'); \
 		print(f'  Header: 16 bytes'); \
-		print(f'  PRG ROM: 32768 bytes'); \
+		print(f'  PRG ROM: 16384 bytes'); \
 		print(f'  CHR ROM: 8192 bytes'); \
-		print(f'  Expected: 40976 bytes'); \
-		print('✓ Size correct' if len(rom) == 40976 else '✗ Size incorrect'); \
+		print(f'  Expected: 24592 bytes'); \
+		print('✓ Size correct' if len(rom) == 24592 else '✗ Size incorrect'); \
 		header = rom[0:4]; \
 		print(f'Header magic: {header}'); \
 		print('✓ Header correct' if header == b'NES\x1a' else '✗ Header incorrect')"
@@ -113,7 +114,7 @@ verify: $(TARGET)
 
 # Display help information
 help:
-	@echo "NES Template Build System"
+	@echo "NES Hello World Build System"
 	@echo ""
 	@echo "Targets:"
 	@echo "  make          - Build ROM (default)"

@@ -1,6 +1,6 @@
-# Contributing to S-NES
+# Contributing to S-NES-BOY
 
-Thank you for your interest in contributing! This document provides guidelines and instructions for contributing to S-NES, a codebase dedicated to learning and development of NES, SNES, and Famicom systems and programming.
+Thank you for your interest in contributing! This document provides guidelines and instructions for contributing to S-NES-BOY, a codebase dedicated to learning and development of NES (Nintendo Entertainment System), SNES (Super Nintendo Entertainment System), and Game Boy systems and programming.
 
 ## Code of Conduct
 
@@ -12,7 +12,7 @@ This project adheres to a Code of Conduct that all contributors are expected to 
 
 If you find a bug or error in the documentation:
 
-1. Check if the issue already exists in the [Issues](https://github.com/yourusername/nes-programming-knowledge-base/issues) section
+1. Check if the issue already exists in the [Issues](https://github.com/yourusername/s-nes-boy/issues) section
 2. If not, create a new issue with:
    - A clear, descriptive title
    - Steps to reproduce the issue
@@ -70,7 +70,7 @@ Each documentation file should include:
 
 1. **Update documentation** if your PR changes functionality
 2. **Add yourself** to CONTRIBUTORS.md if this is your first contribution
-3. **Ensure your PR**:
+3. **Ensure your PR:
    - Follows the project's style guidelines
    - Includes appropriate cross-references
    - Maintains hardware accuracy
@@ -82,30 +82,30 @@ Each documentation file should include:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/nes-programming-knowledge-base.git
-   cd nes-programming-knowledge-base
+   git clone https://github.com/yourusername/s-nes-boy.git
+   cd s-nes-boy
    ```
 
-2. Review the documentation structure in `docs/`
+2. Review the documentation structure in `nes-docs/` and `snes-docs/`
 
 3. Make your changes following the guidelines above
 
 ### Areas for Contribution
 
-- **Documentation improvements**: Clarifications, corrections, additional examples
-- **New sections**: Expanding coverage of NES, SNES, and Famicom programming topics
-- **SNES content**: Adding SNES-specific documentation and examples
-- **Famicom content**: Documenting Famicom-specific features
-- **Code examples**: Better or more comprehensive examples
-- **Cheatsheets**: Additional reference tables or quick guides
-- **Tooling**: Improvements to development workflow documentation
-- **Real hardware**: Additional real hardware considerations for all systems
+- **Documentation improvements: Clarifications, corrections, additional examples
+- **New sections: Expanding coverage of NES, SNES, and programming topics
+- **SNES content: Adding SNES-specific documentation and examples
+- ** content: Documenting -specific features
+- **Code examples: Better or more comprehensive examples
+- **Cheatsheets: Additional reference tables or quick guides
+- **Tooling: Improvements to development workflow documentation
+- **Real hardware: Additional real hardware considerations for all systems
 
 ### Questions?
 
 If you have questions about contributing, please:
 - Open an issue with the `question` label
 - Check existing issues and discussions
-- Review the documentation in `docs/README.md`
+- Review the documentation in `nes-docs/README.md` and `snes-docs/README.md`
 
-Thank you for contributing to S-NES!
+Thank you for contributing to S-NES-BOY!

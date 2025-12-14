@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to S-NES will be documented in this file.
+All notable changes to S-NES-BOY will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -8,7 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- S-NES branding and multi-system support (NES, SNES, Famicom)
+- S-NES-BOY branding and multi-system support (NES, SNES, Game Boy)
+- Complete Game Boy documentation structure
+- Game Boy template and hello-world project
+- RGBDS toolchain auto-installation
+- Emulicious emulator support with Java warning suppression
 - Complete documentation structure for NES development
 - Fundamentals sections (1.1-1.5)
 - Advanced Fundamentals sections (2.1-2.7)
@@ -23,8 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - GitHub issue and PR templates
 
 ### Changed
-- Restructured codebase to S-NES (multi-system focus)
-- Updated all documentation to reflect S-NES branding
+- Renamed project from S-NES to S-NES-BOY to reflect all three systems
+- Restructured codebase to S-NES-BOY (multi-system focus: NES, SNES, Game Boy)
+- Updated all documentation to reflect S-NES-BOY branding
 - Cleaned up unused files and generated artifacts
 - Updated .gitignore to exclude generated files
 
@@ -32,10 +37,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Unused Python generation scripts from welcome project
 - Generated output images from repository
 
-## [1.0.0] - 2024-XX-XX
+## [1.0.0] - 2025-01-01
 
 ### Added
-- Complete S-NES codebase
+- Complete S-NES-BOY codebase
 - Comprehensive documentation covering NES programming
 - Hardware-accurate explanations and examples
 - Cross-referenced sections
@@ -45,5 +50,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/yourusername/s-nes/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/yourusername/s-nes/releases/tag/v1.0.0
+[Unreleased]: https://github.com/yourusername/s-nes-boy/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/yourusername/s-nes-boy/releases/tag/v1.0.0

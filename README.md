@@ -1,148 +1,214 @@
-# S-NES
+# S-NES-BOY
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**S-NES** is a comprehensive codebase dedicated solely to the learning and development of **NES (Nintendo Entertainment System)**, **SNES (Super Nintendo Entertainment System)**, and **Famicom** systems and programming.
+**S-NES-BOY** is a comprehensive codebase dedicated to the learning and development of **NES (Nintendo Entertainment System)**, **SNES (Super Nintendo Entertainment System)**, and **Game Boy** systems and programming.
 
 ## Overview
 
-S-NES provides everything you need to understand and program for Nintendo's 8-bit and 16-bit retro gaming systems, with a focus on hardware accuracy, practical implementation, and comprehensive documentation.
+S-NES-BOY provides everything you need to understand and program for Nintendo's 8-bit and 16-bit retro gaming systems, with a focus on hardware accuracy, practical implementation, and comprehensive documentation.
 
 ### Supported Systems
 
 - **NES (Nintendo Entertainment System)**: Complete coverage of 8-bit NES programming
 - **SNES (Super Nintendo Entertainment System)**: 16-bit SNES development resources
-- **Famicom**: Japanese variant of NES with additional features
+- **Game Boy (DMG/CGB)**: Complete coverage of Game Boy and Game Boy Color programming
 
-## What S-NES Provides
+## What S-NES-BOY Provides
 
 ### 📚 Comprehensive Documentation
 
-- **Fundamentals**: Core concepts and hardware understanding for all systems
-- **Advanced Fundamentals**: Timing, constraints, and hardware-specific details
-- **Core Concepts**: System interactions and architectural patterns
-- **Cheatsheets**: Quick reference tables for active coding
-- **Applied Patterns**: Reusable solutions for common problems
-- **Tooling & Debugging**: Development tools and techniques
-- **Real Hardware**: Considerations for actual hardware testing
+Documentation is split into system-specific directories:
+
+- **`nes-docs/`**: Complete NES documentation
+  - Fundamentals, Advanced Fundamentals, Core Concepts
+  - Cheatsheets, Applied Patterns, Tooling & Debugging
+  - Real Hardware Considerations
+- **`snes-docs/`**: Complete SNES documentation
+  - Fundamentals, Advanced Fundamentals, Core Concepts
+  - Cheatsheets, Applied Patterns, Tooling & Debugging
+  - Real Hardware Considerations
+- **`gb-docs/`**: Complete Game Boy documentation
+  - Fundamentals, Advanced Fundamentals, Core Concepts
+  - Cheatsheets, Official Documentation & References
+  - Gold-Standard Examples
 
 ### 🎮 Example Projects
 
-- **hello-world**: Complete NES program demonstrating text rendering with full alphabet/lexicon
-- **welcome**: Centered text display project showing "Welcome to S-NES"
-- **template**: Minimal starter template for new projects
+Projects are organized by system:
+
+- **`Projects/nes/`**: NES example projects
+  - **hello-world**: Complete NES program demonstrating text rendering
+  - **welcome**: Centered text display project
+- **`Projects/snes/`**: SNES example projects
+  - **hello-world**: Complete SNES program demonstrating text rendering
+  - **welcome**: Centered text display project
+- **`Projects/gb/`**: Game Boy example projects
+  - **hello-world**: Complete Game Boy program demonstrating text rendering
+
+### 🛠️ Templates
+
+Templates are organized by system:
+
+- **`templates/nes/`**: Complete NES project template with modular architecture
+- **`templates/snes/`**: Complete SNES project template with modular architecture
+- **`templates/gb/`**: Complete Game Boy project template with modular architecture
 
 ### 🛠️ Development Tools
 
 - Complete toolchain setup guides
 - Emulator and debugger recommendations
-- Build systems and Makefiles
+- Build systems and Makefiles with auto-installation
 - Hardware testing guidelines
 
 ## Quick Start
 
 ### For NES Development
 
-1. **Start with Fundamentals**: Read `docs/01-fundamentals/` to establish correct mental models
-2. **Move to Advanced Fundamentals**: Read `docs/02-advanced-fundamentals/` to understand timing and constraints
-3. **Learn Core Concepts**: Read `docs/03-core-concepts/` to understand system interactions
-4. **Use Cheatsheets**: Keep `docs/04-cheatsheets/` open while coding
-5. **Apply Patterns**: Reference `docs/05-applied-patterns/` when implementing features
-6. **Set Up Tooling**: Follow `docs/06-tooling-debugging/` to set up your development environment
-7. **Test on Hardware**: Read `docs/07-real-hardware/` before finalizing your project
+1. **Start with Fundamentals**: Read `nes-docs/01-fundamentals/` to establish correct mental models
+2. **Move to Advanced Fundamentals**: Read `nes-docs/02-advanced-fundamentals/` to understand timing and constraints
+3. **Learn Core Concepts**: Read `nes-docs/03-core-concepts/` to understand system interactions
+4. **Use Cheatsheets**: Keep `nes-docs/04-cheatsheets/` open while coding
+5. **Apply Patterns**: Reference `nes-docs/05-applied-patterns/` when implementing features
+6. **Set Up Tooling**: Follow `nes-docs/06-tooling-debugging/` to set up your development environment
+7. **Test on Hardware**: Read `nes-docs/07-real-hardware/` before finalizing your project
+8. **Use Template**: Start with `templates/nes/` for new projects
 
 ### For SNES Development
 
-SNES documentation is currently being expanded. Start with NES fundamentals as they provide the foundation for understanding SNES architecture.
+1. **Start with Fundamentals**: Read `snes-docs/01-fundamentals/` to establish correct mental models
+2. **Move to Advanced Fundamentals**: Read `snes-docs/02-advanced-fundamentals/` to understand timing and constraints
+3. **Learn Core Concepts**: Read `snes-docs/03-core-concepts/` to understand system interactions
+4. **Use Cheatsheets**: Keep `snes-docs/04-cheatsheets/` open while coding
+5. **Apply Patterns**: Reference `snes-docs/05-applied-patterns/` when implementing features
+6. **Set Up Tooling**: Follow `snes-docs/06-tooling-debugging/` to set up your development environment
+7. **Test on Hardware**: Read `snes-docs/07-real-hardware/` before finalizing your project
+8. **Use Template**: Start with `templates/snes/` for new projects
 
-### For Famicom Development
+### For Game Boy Development
 
-Famicom development follows NES patterns with additional considerations for Japanese hardware features. See NES documentation as the primary reference.
+1. **Start with Fundamentals**: Read `gb-docs/01-fundamentals/` to establish correct mental models
+2. **Move to Advanced Fundamentals**: Read `gb-docs/02-advanced-fundamentals/` to understand timing and constraints
+3. **Learn Core Concepts**: Read `gb-docs/03-core-concepts/` to understand system interactions
+4. **Use Cheatsheets**: Keep `gb-docs/04-cheatsheets/` open while coding
+5. **Review Official Documentation**: Reference `gb-docs/05-official-documentation/` for authoritative sources
+6. **Study Examples**: Review `gb-docs/06-gold-standard-examples/` for best practices
+7. **Use Template**: Start with `templates/gb/` for new projects
 
-## Documentation Structure
+## Directory Structure
 
 ```
-docs/
-├── 01-fundamentals/          # Core concepts and hardware basics
-│   ├── 1.1-nes-system-overview.md
-│   ├── 1.2-6502-cpu-fundamentals.md
-│   ├── 1.3-memory-fundamentals.md
-│   ├── 1.4-ppu-fundamentals.md
-│   └── 1.5-rom-fundamentals.md
-├── 02-advanced-fundamentals/  # Timing, constraints, advanced topics
-│   ├── 2.1-cpu-timing-cycles.md
-│   ├── 2.2-nmi-vblank-discipline.md
-│   ├── 2.3-ppu-rendering-rules.md
-│   ├── 2.4-controller-io.md
-│   ├── 2.5-audio-fundamentals.md
-│   ├── 2.6-optimization-techniques.md
-│   └── 2.7-graphics-pixel-art.md
-├── 03-core-concepts/          # System interactions and architecture
-│   ├── 3.1-the-game-loop.md
-│   ├── 3.2-data-oriented-design.md
-│   ├── 3.3-rendering-architecture.md
-│   ├── 3.4-input-state-output-pipeline.md
-│   └── 3.5-map-level-systems.md
-├── 04-cheatsheets/            # Quick reference tables
-│   ├── 4.1-cpu-cheatsheets.md
-│   ├── 4.2-ppu-cheatsheets.md
-│   ├── 4.3-memory-cheatsheets.md
-│   ├── 4.4-timing-cheatsheets.md
-│   ├── 4.5-audio-cheatsheets.md
-│   └── 4.6-optimization-cheatsheets.md
-├── 05-applied-patterns/       # Reusable solutions
-│   ├── 5.1-sprite-engine-patterns.md
-│   ├── 5.2-scrolling-patterns.md
-│   ├── 5.3-collision-systems.md
-│   ├── 5.4-animation-systems.md
-│   └── 5.5-audio-integration.md
-├── 06-tooling-debugging/      # Development tools
-│   ├── 6.1-toolchain.md
-│   ├── 6.2-emulators-debuggers.md
-│   └── 6.3-test-roms.md
-└── 07-real-hardware/          # Hardware considerations
-    └── real-hardware-considerations.md
+S-NES-BOY/
+├── nes-docs/                  # NES documentation
+│   ├── 01-fundamentals/
+│   ├── 02-advanced-fundamentals/
+│   ├── 03-core-concepts/
+│   ├── 04-cheatsheets/
+│   ├── 05-applied-patterns/
+│   ├── 06-tooling-debugging/
+│   └── 07-real-hardware/
+├── snes-docs/                 # SNES documentation
+│   ├── 01-fundamentals/
+│   ├── 02-advanced-fundamentals/
+│   ├── 03-core-concepts/
+│   ├── 04-cheatsheets/
+│   ├── 05-applied-patterns/
+│   ├── 06-tooling-debugging/
+│   └── 07-real-hardware/
+├── gb-docs/                   # Game Boy documentation
+│   ├── 01-fundamentals/
+│   ├── 02-advanced-fundamentals/
+│   ├── 03-core-concepts/
+│   ├── 04-cheatsheets/
+│   ├── 05-official-documentation/
+│   └── 06-gold-standard-examples/
+├── templates/                 # Project templates
+│   ├── nes/                   # NES template
+│   ├── snes/                  # SNES template
+│   └── gb/                    # Game Boy template
+├── Projects/                  # Example projects
+│   ├── nes/                   # NES projects
+│   │   ├── hello-world/
+│   │   └── welcome/
+│   ├── snes/                  # SNES projects
+│   │   ├── hello-world/
+│   │   └── welcome/
+│   └── gb/                    # Game Boy projects
+│       └── hello-world/
+├── .github/                   # GitHub templates and workflows
+├── CONTRIBUTING.md            # Contribution guidelines
+├── CODE_OF_CONDUCT.md         # Community standards
+├── LICENSE                    # MIT License
+├── CHANGELOG.md               # Project history
+├── REFERENCES.md              # External resources
+├── GETTINGSTARTED.md          # Quick start guide
+├── DIRECTORY_STRUCTURE.md     # Directory structure documentation
+└── README.md                  # This file
 ```
 
 ## Projects
 
-### hello-world
+### NES Projects (`Projects/nes/`)
 
-A complete NES program demonstrating text rendering with a full alphabet/lexicon (A-Z, 0-9, punctuation). Perfect starting point for understanding NES programming basics.
+- **hello-world**: Complete NES program demonstrating text rendering with full alphabet/lexicon (A-Z, 0-9, punctuation)
+- **welcome**: Centered text display project showing "Welcome to S-NES-BOY"
 
-**Location**: `Projects/hello-world/`
+### SNES Projects (`Projects/snes/`)
 
-### welcome
+- **hello-world**: Complete SNES program demonstrating text rendering with full alphabet/lexicon (A-Z, 0-9, punctuation)
+- **welcome**: Centered text display project showing "WELCOME TO S-NES-BOY"
 
-A centered text display project showing "Welcome to S-NES". Demonstrates proper text centering and name table rendering.
+### Game Boy Projects (`Projects/gb/`)
 
-**Location**: `Projects/welcome/`
+- **hello-world**: Complete Game Boy program demonstrating text rendering with full alphabet/lexicon (A-Z, 0-9, punctuation)
 
-### template
+## Templates
 
-Minimal starter template for new NES projects. Includes proper initialization, NMI handler, and build system.
+### NES Template (`templates/nes/`)
 
-**Location**: `template/`
+Complete NES project template with modular architecture. Includes:
+- Memory definitions, constants, macros
+- Input system, state machine, screen modules
+- PPU, sprite, text, palette, tilemap systems
+- Audio system, game logic
+- Complete build system with auto-installation
+
+### SNES Template (`templates/snes/`)
+
+Complete SNES project template with modular architecture. Includes:
+- WRAM, VRAM, CGRAM, OAM definitions
+- 65816 CPU constants, PPU constants
+- SPC700 audio system
+- Complete build system with auto-installation
+
+### Game Boy Template (`templates/gb/`)
+
+Complete Game Boy project template with modular architecture. Includes:
+- Hardware definitions (official hardware.inc)
+- LR35902 CPU constants
+- PPU, LCD, DMA definitions
+- Complete build system with auto-installation
 
 ## Philosophy
 
-S-NES follows these core principles:
+S-NES-BOY follows these core principles:
 
 - **Hardware-first**: No abstractions until justified by hardware constraints
 - **Assembly-aware**: Assembly language is the foundation; higher-level languages are convenience layers
 - **Deterministic**: Cycle counts, registers, and memory maps matter
 - **Cross-linked**: Concepts reference each other, not isolated chapters
 - **Cheatsheet-driven**: Fast recall is a first-class feature
-- **Multi-system**: Unified approach to NES, SNES, and Famicom development
+- **Multi-system**: Unified approach to NES, SNES, and Game Boy development
 
 ## Requirements
 
 - Basic programming knowledge
 - Understanding of assembly language (helpful but not required)
 - Interest in retro game development and hardware programming
-- For NES: `ca65` assembler (part of cc65), `ld65` linker
-- For SNES: SNES development tools (expanding)
-- Emulator for testing (FCEUX, Mesen2, etc.)
+- For NES: `ca65` assembler (part of cc65), `ld65` linker (auto-installed)
+- For SNES: `ca65` assembler (part of cc65) with `--cpu 65816`, `ld65` linker (auto-installed)
+- For Game Boy: `rgbasm`, `rgblink`, `rgbfix` (RGBDS toolchain, auto-installed)
+- Emulator for testing (FCEUX for NES; bsnes for SNES; emulicious for Game Boy - all auto-installed)
 
 ## Contributing
 
@@ -156,8 +222,8 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 - Improve code examples
 - Enhance cheatsheets
 - Share real hardware experiences
-- Add SNES-specific content
-- Document Famicom-specific features
+- Add system-specific content
+- Document system-specific features
 
 ## License
 
@@ -169,22 +235,25 @@ This project adheres to a Code of Conduct. Please read [CODE_OF_CONDUCT.md](CODE
 
 ## Resources
 
-- [Documentation](docs/README.md) - Complete documentation index
+- [NES Documentation](nes-docs/README.md) - Complete NES documentation index
+- [SNES Documentation](snes-docs/README.md) - Complete SNES documentation index
+- [Game Boy Documentation](gb-docs/README.md) - Complete Game Boy documentation index
 - [References](REFERENCES.md) - External resources and links
 - [Contributing Guide](CONTRIBUTING.md) - How to contribute
 - [Changelog](CHANGELOG.md) - Project history
 - [Getting Started](GETTINGSTARTED.md) - Quick start guide
+- [Directory Structure](DIRECTORY_STRUCTURE.md) - Detailed directory documentation
 
 ## Target Audience
 
 - **Technically competent**: Assumes programming knowledge
 - **New to retro systems**: No system-specific intuition required
-- **6502/65816 literate**: Basic assembly understanding helpful but not required
+- **6502/65816/LR35902 literate**: Basic assembly understanding helpful but not required
 - **Hardware enthusiasts**: Interest in understanding how these systems work
 
 ## Non-Goals
 
-S-NES does **not** cover:
+S-NES-BOY does **not** cover:
 
 - General programming fundamentals
 - Abstract game design theory
@@ -192,57 +261,41 @@ S-NES does **not** cover:
 - Emulator-only tricks without hardware justification
 - Modern game development (focus is on retro systems)
 
-## Project Structure
-
-```
-.
-├── docs/                  # Complete documentation
-│   ├── 01-fundamentals/
-│   ├── 02-advanced-fundamentals/
-│   ├── 03-core-concepts/
-│   ├── 04-cheatsheets/
-│   ├── 05-applied-patterns/
-│   ├── 06-tooling-debugging/
-│   └── 07-real-hardware/
-├── Projects/              # Example projects
-│   ├── hello-world/      # Complete NES text rendering example
-│   └── welcome/          # Centered text display example
-├── template/              # Starter template for new projects
-├── .github/               # GitHub templates and workflows
-├── CONTRIBUTING.md        # Contribution guidelines
-├── CODE_OF_CONDUCT.md     # Community standards
-├── LICENSE                # MIT License
-├── CHANGELOG.md           # Project history
-├── REFERENCES.md          # External resources
-├── GETTINGSTARTED.md      # Quick start guide
-└── README.md              # This file
-```
-
-## Acknowledgments
-
-S-NES follows best practices from the [Open Source Guide](https://opensource.guide/) and is built on the foundation of excellent retro development resources from the community.
-
-## Support
-
-- **Issues**: Use GitHub Issues for bug reports and feature requests
-- **Questions**: Use the question template in `.github/ISSUE_TEMPLATE/`
-- **Documentation**: Check `docs/` for comprehensive guides
-
 ## Getting Started
 
 For a quick start guide, see [GETTINGSTARTED.md](GETTINGSTARTED.md).
 
-For new projects, use the template:
+For new NES projects, use the template:
 
 ```bash
-cd template
-make          # Build template.nes
-make run      # Run in FCEUX
+cd templates/nes
+make          # Build template.nes (auto-installs toolchain if needed)
+make run      # Run in FCEUX (auto-installs if needed)
 make clean    # Clean build files
 ```
 
-See [`template/README.md`](template/README.md) for complete template documentation.
+For new SNES projects, use the template:
+
+```bash
+cd templates/snes
+make          # Build template.sfc (auto-installs toolchain if needed)
+make run      # Run in bsnes (auto-installs if needed)
+make clean    # Clean build files
+```
+
+For new Game Boy projects, use the template:
+
+```bash
+cd templates/gb
+make          # Build template.gb (auto-installs RGBDS if needed)
+make run      # Run in emulicious (auto-installs if needed)
+make clean    # Clean build files
+```
+
+See [`templates/nes/README.md`](templates/nes/README.md) for complete NES template documentation.
+See [`templates/snes/README.md`](templates/snes/README.md) for complete SNES template documentation.
+See [`templates/gb/README.md`](templates/gb/README.md) for complete Game Boy template documentation.
 
 ---
 
-**S-NES**: Dedicated to learning and development of NES, SNES, and Famicom systems.
+**S-NES-BOY**: Dedicated to learning and development of NES, SNES, and Game Boy systems.

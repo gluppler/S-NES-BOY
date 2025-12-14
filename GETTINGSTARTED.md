@@ -1,6 +1,6 @@
-# Getting Started with S-NES Development on Linux
+# Getting Started with S-NES-BOY Development on Linux
 
-Complete guide to setting up a development environment for NES, SNES, and Famicom programming on Linux. This guide is **Linux-only** and assumes a modern Linux distribution. Part of the S-NES codebase.
+Complete guide to setting up a development environment for NES, SNES, and Game Boy programming on Linux. This guide is **Linux-only** and assumes a modern Linux distribution. Part of the S-NES-BOY codebase.
 
 ## Prerequisites
 
@@ -95,7 +95,7 @@ ld65 --version
 
 ### Mesen2 (Recommended - Best Debugger)
 
-**Debian/Ubuntu:**
+**Debian/Ubuntu:
 ```bash
 # Download latest AppImage from GitHub releases
 cd ~/Downloads
@@ -112,7 +112,7 @@ source ~/.bashrc
 mesen2 --version
 ```
 
-**Arch Linux:**
+**Arch Linux:
 ```bash
 # Install from AUR
 yay -S mesen2
@@ -120,7 +120,7 @@ yay -S mesen2
 paru -S mesen2
 ```
 
-**Manual Installation (All Distributions):**
+**Manual Installation (All Distributions):
 ```bash
 # Download AppImage
 cd ~/Downloads
@@ -141,22 +141,22 @@ EOF
 
 ### FCEUX (Alternative)
 
-**Debian/Ubuntu:**
+**Debian/Ubuntu:
 ```bash
 sudo apt-get install -y fceux
 ```
 
-**Arch Linux:**
+**Arch Linux:
 ```bash
 sudo pacman -S fceux
 ```
 
-**Fedora:**
+**Fedora:
 ```bash
 sudo dnf install fceux
 ```
 
-**From Source:**
+**From Source:
 ```bash
 cd /tmp
 git clone https://github.com/TASVideos/fceux.git
@@ -307,7 +307,7 @@ make
 file *.nes
 ```
 
-The `file` command should show: "NES ROM data" or similar.
+The `file` comm and should show: "NES ROM data" or similar.
 
 ### 5. Test Emulator
 
@@ -324,20 +324,20 @@ fceux --help
 ### Basic Workflow
 
 1. **Edit source code** (`main.asm`)
-2. **Build ROM**: `make`
-3. **Test in emulator**: `make run` or `mesen2 game.nes`
-4. **Debug**: Use emulator debugger (Mesen2 recommended)
-5. **Iterate**: Repeat steps 1-4
+2. **Build ROM: `make`
+3. **Test in emulator: `make run` or `mesen2 game.nes`
+4. **Debug: Use emulator debugger (Mesen2 recommended)
+5. **Iterate: Repeat steps 1-4
 
 ### Using Mesen2 Debugger
 
-1. **Load ROM**: File → Open ROM
-2. **Set breakpoints**: Debug → Breakpoints → Add
-3. **Run**: F5 (run), F10 (step over), F11 (step into)
-4. **Inspect**: View → CPU, PPU, Memory
-5. **View PPU**: View → PPU Viewer
+1. **Load ROM: File → Open ROM
+2. **Set breakpoints: Debug → Breakpoints → Add
+3. **Run: F5 (run), F10 (step over), F11 (step into)
+4. **Inspect: View → CPU, PPU, Memory
+5. **View PPU: View → PPU Viewer
 
-### Using Command Line Tools
+### Using Comm and Line Tools
 
 ```bash
 # Build
@@ -360,21 +360,21 @@ ls -lh *.nes
 
 ### Graphics Tools
 
-**YY-CHR (Tile Editor):**
+**YY-CHR (Tile Editor):
 - Download from: https://w.atwiki.jp/yychr/
 - Requires Wine for Linux: `sudo apt-get install wine` (Debian/Ubuntu)
 
-**Aseprite (Sprite Editor):**
+**Aseprite (Sprite Editor):
 - Available on Linux via Steam or compile from source
 - Website: https://www.aseprite.org/
 
 ### Audio Tools
 
-**FamiTracker:**
+**FamiTracker:
 - Download from: https://github.com/Dn-Programming-Core-Management/0CC-FamiTracker
 - Requires Wine or compile from source
 
-**FamiTone2:**
+**FamiTone2:
 - Included in many NES projects
 - Repository: https://github.com/nesdoug/FamiTone2
 
@@ -414,25 +414,25 @@ find /usr -name "ca65" 2>/dev/null
 
 ### Build Errors
 
-**"ca65: command not found"**
+**"ca65: comm and not found"
 ```bash
 # Install cc65 (see installation section)
 sudo apt-get install cc65  # Debian/Ubuntu
 sudo pacman -S cc65        # Arch
 ```
 
-**"ld65: undefined symbol"**
+**"ld65: undefined symbol"
 - Check linker configuration (`nes.cfg`)
 - Verify segment names match in source files
 - Check memory map addresses
 
-**"Cannot open input file"**
+**"Cannot open input file"
 - Verify file paths in Makefile
 - Check file permissions: `chmod 644 *.asm`
 
 ### Emulator Issues
 
-**Mesen2 won't run:**
+**Mesen2 won't run:
 ```bash
 # Make AppImage executable
 chmod +x Mesen2-x64.AppImage
@@ -444,7 +444,7 @@ ldd Mesen2-x64.AppImage  # May show missing libraries
 sudo apt-get install libfuse2
 ```
 
-**FCEUX won't start:**
+**FCEUX won't start:
 ```bash
 # Check if installed correctly
 which fceux
@@ -455,10 +455,10 @@ fceux --verbose game.nes
 
 ### ROM Won't Boot
 
-1. **Check iNES header**: Verify header bytes in `main.asm`
-2. **Check reset vector**: Must point to valid code
-3. **Verify initialization**: Ensure proper PPU/APU setup
-4. **Test in multiple emulators**: Try Mesen2 and FCEUX
+1. **Check iNES header: Verify header bytes in `main.asm`
+2. **Check reset vector: Must point to valid code
+3. **Verify initialization: Ensure proper PPU/APU setup
+4. **Test in multiple emulators: Try Mesen2 and FCEUX
 
 ## Environment Variables (Optional)
 
@@ -496,26 +496,26 @@ source ~/.bashrc
 
 ## Next Steps
 
-1. **Read Documentation**: Review `docs/README.md` for NES programming concepts
-2. **Study Examples**: Examine the `template/` directory
-3. **Follow Tutorials**: Check `REFERENCES.md` for learning resources
-4. **Join Community**: Visit NesDev forums (see `REFERENCES.md`)
+1. **Read Documentation**: Review `nes-docs/README.md` for NES programming concepts or `snes-docs/README.md` for SNES programming concepts
+2. **Study Examples: Examine the `templates/nes/` directory for NES or `templates/snes/` for SNES
+3. **Follow Tutorials: Check `REFERENCES.md` for learning resources
+4. **Join Community: Visit NesDev forums (see `REFERENCES.md`)
 
 ## System Requirements
 
 ### Minimum
 
-- **CPU**: x86_64 or compatible
-- **RAM**: 2 GB
-- **Disk**: 500 MB free space
-- **OS**: Linux kernel 3.10+ (most modern distributions)
+- **CPU: x86_64 or compatible
+- **RAM: 2 GB
+- **Disk: 500 MB free space
+- **OS: Linux kernel 3.10+ (most modern distributions)
 
 ### Recommended
 
-- **CPU**: Multi-core x86_64
-- **RAM**: 4 GB+
-- **Disk**: 1 GB+ free space
-- **OS**: Recent LTS distribution (Ubuntu 20.04+, Debian 11+, Arch Linux)
+- **CPU: Multi-core x86_64
+- **RAM: 4 GB+
+- **Disk: 1 GB+ free space
+- **OS: Recent LTS distribution (Ubuntu 20.04+, Debian 11+, Arch Linux)
 
 ## Distribution-Specific Notes
 
@@ -541,19 +541,23 @@ source ~/.bashrc
 
 For issues specific to:
 
-- **cc65**: https://github.com/cc65/cc65/issues
-- **Mesen2**: https://github.com/SourMesen/Mesen2/issues
-- **FCEUX**: https://github.com/TASVideos/fceux/issues
-- **This Project**: See `CONTRIBUTING.md` and open an issue
+- **cc65: https://github.com/cc65/cc65/issues
+- **Mesen2: https://github.com/SourMesen/Mesen2/issues
+- **FCEUX: https://github.com/TASVideos/fceux/issues
+- **This Project: See `CONTRIBUTING.md` and open an issue
 
 ## References
 
-- [S-NES Main README](README.md) - S-NES project overview
-- [S-NES Documentation](docs/README.md) - Complete development guide
+- [S-NES-BOY Main README](README.md) - S-NES-BOY project overview
+- [NES Documentation](nes-docs/README.md) - Complete NES development guide
+- [SNES Documentation](snes-docs/README.md) - Complete SNES development guide
+- [Game Boy Documentation](gb-docs/README.md) - Complete Game Boy development guide
 - [References](REFERENCES.md) - External resources and links
-- [Template](template/README.md) - S-NES template
+- [NES Template](templates/nes/README.md) - S-NES-BOY NES template
+- [SNES Template](templates/snes/README.md) - S-NES-BOY SNES template
+- [Game Boy Template](templates/gb/README.md) - S-NES-BOY Game Boy template
 - [Contributing](CONTRIBUTING.md) - How to contribute
 
 ---
 
-**Note**: This guide is **Linux-only**. For other operating systems, see official tool documentation. All commands assume a bash-compatible shell.
+**Note: This guide is **Linux-only**. For other operating systems, see official tool documentation. All commands assume a bash-compatible shell.

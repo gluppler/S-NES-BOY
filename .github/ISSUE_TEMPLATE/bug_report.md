@@ -10,9 +10,9 @@ assignees: ''
 A clear and concise description of what the bug is.
 
 ## Location
-- **Section**: [e.g., 2.1 CPU Timing & Cycles]
-- **File**: [e.g., docs/02-advanced-fundamentals/2.1-cpu-timing-cycles.md]
-- **Specific content**: [Quote or describe the problematic content]
+- **Section: [e.g., 2.1 CPU Timing & Cycles]
+- **File: [e.g., nes-docs/02-advanced-fundamentals/2.1-cpu-timing-cycles.md or snes-docs/02-advanced-fundamentals/2.1-cpu-timing-cycles.md]
+- **Specific content: [Quote or describe the problematic content]
 
 ## Expected Behavior
 What should the documentation say or show?

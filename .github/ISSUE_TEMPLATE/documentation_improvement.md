@@ -16,9 +16,9 @@ Why is this improvement needed? What problem does it solve?
 Describe what you'd like to see changed or added.
 
 ## Location
-- **Section**: [e.g., 3.1 The Game Loop]
-- **File**: [e.g., docs/03-core-concepts/3.1-the-game-loop.md]
-- **New section or modification?**: [New / Modification]
+- **Section: [e.g., 3.1 The Game Loop]
+- **File: [e.g., nes-docs/03-core-concepts/3.1-the-game-loop.md or snes-docs/03-core-concepts/3.1-the-game-loop.md]
+- **New section or modification?: [New / Modification]
 
 ## Additional Context
 - Examples or references

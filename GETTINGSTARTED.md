@@ -1,6 +1,6 @@
-# Getting Started with NES Development on Linux
+# Getting Started with S-NES Development on Linux
 
-Complete guide to setting up a NES development environment on Linux. This guide is **Linux-only** and assumes a modern Linux distribution.
+Complete guide to setting up a development environment for NES, SNES, and Famicom programming on Linux. This guide is **Linux-only** and assumes a modern Linux distribution. Part of the S-NES codebase.
 
 ## Prerequisites
 
@@ -548,9 +548,10 @@ For issues specific to:
 
 ## References
 
-- [NES Documentation](docs/README.md) - Complete NES programming guide
+- [S-NES Main README](README.md) - S-NES project overview
+- [S-NES Documentation](docs/README.md) - Complete development guide
 - [References](REFERENCES.md) - External resources and links
-- [Template](template/README.md) - NES template
+- [Template](template/README.md) - S-NES template
 - [Contributing](CONTRIBUTING.md) - How to contribute
 
 ---

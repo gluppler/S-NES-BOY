@@ -1,6 +1,10 @@
-# NES Programming Knowledge Base - Documentation
+# S-NES Documentation
 
-A comprehensive, hardware-accurate guide to NES programming, from fundamentals to advanced patterns.
+A comprehensive, hardware-accurate guide to NES, SNES, and Famicom programming, from fundamentals to advanced patterns.
+
+## Overview
+
+This documentation is part of **S-NES**, a codebase dedicated to learning and development of Nintendo Entertainment System (NES), Super Nintendo Entertainment System (SNES), and Famicom systems and programming.
 
 ## Structure
 
@@ -8,10 +12,10 @@ This knowledge base is organized into seven primary sections:
 
 ### 1. Fundamentals
 
-Establish correct mental models and non-negotiable concepts.
+Establish correct mental models and non-negotiable concepts for NES, SNES, and Famicom systems.
 
 - [1.1 NES System Overview](01-fundamentals/1.1-nes-system-overview.md) - Hardware overview, NTSC vs PAL, VBlank
-- [1.2 6502 CPU Fundamentals](01-fundamentals/1.2-6502-cpu-fundamentals.md) - Registers, addressing modes, instructions
+- [1.2 6502 CPU Fundamentals](01-fundamentals/1.2-6502-cpu-fundamentals.md) - Registers, addressing modes, instructions (NES/Famicom)
 - [1.3 Memory Fundamentals](01-fundamentals/1.3-memory-fundamentals.md) - CPU memory map, zero page, stack
 - [1.4 PPU Fundamentals](01-fundamentals/1.4-ppu-fundamentals.md) - Tiles, pattern tables, name tables, sprites
 - [1.5 ROM Fundamentals](01-fundamentals/1.5-rom-fundamentals.md) - iNES header, PRG/CHR ROM, Mapper 0
@@ -26,6 +30,7 @@ Move from "it works" to "it is correct on real hardware".
 - [2.4 Controller I/O](02-advanced-fundamentals/2.4-controller-io.md) - Shift register, strobing, button reading
 - [2.5 Audio Fundamentals](02-advanced-fundamentals/2.5-audio-fundamentals.md) - APU channels, frame counter, timing
 - [2.6 Advanced Optimization Techniques](02-advanced-fundamentals/2.6-optimization-techniques.md) - Cycle optimization, memory access, performance tuning
+- [2.7 Graphics & Pixel Art](02-advanced-fundamentals/2.7-graphics-pixel-art.md) - Tile design, palette systems, pixel art techniques, NES/SNES graphics
 
 ### 3. Core Concepts
 
@@ -68,7 +73,7 @@ Tools and techniques for development.
 
 ### 7. Real Hardware Considerations
 
-What you need to know for real NES hardware.
+What you need to know for real NES, SNES, and Famicom hardware.
 
 - [Real Hardware Considerations](07-real-hardware/real-hardware-considerations.md) - Flashcarts, power-on state, emulator mismatches
 
@@ -77,26 +82,38 @@ What you need to know for real NES hardware.
 This knowledge base follows these principles:
 
 - **Hardware-first**: No abstractions until justified
-- **Assembly-aware**: C is treated as a convenience layer, not the truth
+- **Assembly-aware**: Assembly language is the foundation; higher-level languages are convenience layers
 - **Deterministic**: Cycle counts, registers, memory maps matter
 - **Cross-linked**: Concepts reference each other, not isolated chapters
 - **Cheatsheet-driven**: Fast recall is a first-class feature
+- **Multi-system**: Unified approach to NES, SNES, and Famicom development
 
 ## Getting Started
 
+### For NES Development
+
 1. **Start with Fundamentals**: Read sections 1.1–1.5 to establish correct mental models
-2. **Move to Advanced Fundamentals**: Read sections 2.1–2.5 to understand timing and constraints
+2. **Move to Advanced Fundamentals**: Read sections 2.1–2.7 to understand timing, constraints, and graphics
 3. **Learn Core Concepts**: Read sections 3.1–3.5 to understand system interactions
-4. **Use Cheatsheets**: Keep sections 4.1–4.5 open while coding
+4. **Use Cheatsheets**: Keep sections 4.1–4.6 open while coding
 5. **Apply Patterns**: Reference sections 5.1–5.5 when implementing features
 6. **Set Up Tooling**: Follow section 6.1 to set up your development environment
 7. **Test on Hardware**: Read section 7 before finalizing your game
 
+### For SNES Development
+
+SNES documentation is currently being expanded. Start with NES fundamentals as they provide the foundation for understanding SNES architecture. The 6502 CPU fundamentals apply to the SNES's 65816 CPU (backward compatible mode).
+
+### For Famicom Development
+
+Famicom development follows NES patterns with additional considerations for Japanese hardware features. See NES documentation as the primary reference.
+
 ## Target Audience
 
 - **Technically competent**: Assumes programming knowledge
-- **New to NES**: No NES-specific intuition required
-- **6502 literate**: Basic assembly understanding helpful but not required
+- **New to retro systems**: No system-specific intuition required
+- **6502/65816 literate**: Basic assembly understanding helpful but not required
+- **Hardware enthusiasts**: Interest in understanding how these systems work
 
 ## Non-Goals
 
@@ -106,10 +123,11 @@ This knowledge base does **not** cover:
 - Abstract game design theory
 - High-level engines or frameworks
 - Emulator-only tricks without hardware justification
+- Modern game development (focus is on retro systems)
 
 ## Related Resources
 
-- [Main README](../README.md) - Project overview and contribution guidelines
+- [Main README](../README.md) - S-NES project overview and contribution guidelines
 - [References](../REFERENCES.md) - External resources and authoritative links
 - [Contributing Guide](../CONTRIBUTING.md) - How to contribute to this project
 - [Code of Conduct](../CODE_OF_CONDUCT.md) - Community standards
@@ -117,16 +135,20 @@ This knowledge base does **not** cover:
 ## External Resources
 
 - [NES Dev Wiki](https://www.nesdev.org/) - Comprehensive NES development resources
+- [SNES Dev Wiki](https://wiki.superfamicom.org/) - SNES development resources
 - [6502.org](http://www.6502.org/) - 6502 processor documentation
+- [65816.org](http://www.65816.org/) - 65816 processor documentation
 - [Open Source Guide](https://opensource.guide/) - Open source best practices
 
 ## Cross-References
 
-- [Main README](../README.md) - Project overview and contribution guidelines
+- [Main README](../README.md) - S-NES project overview
 - [References](../REFERENCES.md) - External resources and authoritative links
 - [Contributing Guide](../CONTRIBUTING.md) - How to contribute to this project
 - [Code of Conduct](../CODE_OF_CONDUCT.md) - Community standards
 
 ---
 
-**Note**: This documentation is maintained as part of an open source project. Contributions are welcome! See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines.
+**S-NES Documentation**: Dedicated to learning and development of NES, SNES, and Famicom systems.
+
+**Note**: This documentation is maintained as part of the S-NES open source project. Contributions are welcome! See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines.

@@ -1,6 +1,6 @@
-# NES Programming - Complete Reference List
+# S-NES - Complete Reference List
 
-Official and authoritative resources for NES programming and development.
+Official and authoritative resources for NES, SNES, and Famicom programming and development.
 
 ## Core NES Documentation (Essential)
 
@@ -30,9 +30,37 @@ Official and authoritative resources for NES programming and development.
   - URL: https://www.nesdev.org/wiki/Standard_controller
   - Description: How $4016/$4017 controller reading works.
 
+## SNES Documentation
+
+### Primary Sources
+
+- **SNES Dev Wiki**
+  - URL: https://wiki.superfamicom.org/
+  - Description: Comprehensive SNES development resources and documentation.
+
+- **SNES Programming Guide**
+  - URL: https://en.wikibooks.org/wiki/Super_NES_Programming
+  - Description: SNES programming tutorials and guides.
+
+- **65816 CPU Documentation**
+  - URL: http://www.65816.org/
+  - Description: 65816 processor documentation (SNES CPU).
+
+## Famicom Documentation
+
+### Primary Sources
+
+- **Famicom Technical Documentation**
+  - URL: https://www.nesdev.org/wiki/Famicom
+  - Description: Famicom-specific features and differences from NES.
+
+- **Famicom Disk System**
+  - URL: https://www.nesdev.org/wiki/Famicom_Disk_System
+  - Description: FDS hardware and programming information.
+
 ## CPU & Assembly References
 
-### 6502 Documentation
+### 6502 Documentation (NES/Famicom)
 
 - **6502 Instruction Set Reference**
   - URL: http://www.obelisk.me.uk/6502/reference.html
@@ -53,6 +81,16 @@ Official and authoritative resources for NES programming and development.
 - **6502.org**
   - URL: http://www.6502.org/
   - Description: Comprehensive 6502 processor documentation and resources.
+
+### 65816 Documentation (SNES)
+
+- **65816 Instruction Set**
+  - URL: http://www.65816.org/
+  - Description: Complete 65816 processor documentation.
+
+- **65816 Programming Reference**
+  - URL: https://wiki.superfamicom.org/65816-reference
+  - Description: SNES CPU programming reference.
 
 ## ROM Format & Mappers
 
@@ -173,16 +211,15 @@ Official and authoritative resources for NES programming and development.
   - Repository: https://github.com/TASVideos/fceux
   - Official Website: https://fceux.com/web/home.html
   - Documentation: https://github.com/TASVideos/fceux/wiki
-  - User Guide: https://github.com/TASVideos/fceux/wiki/UserGuide
-  - Command Line Options: https://github.com/TASVideos/fceux/wiki/CommandLineOptions
-  - PPU Viewer Documentation: Available in emulator (Tools → PPU Viewer)
-  - Lua Scripting: https://github.com/TASVideos/fceux/wiki/LuaScripting
-  - Debugging Features: Breakpoints, memory viewer, CPU state, PPU state, trace logger
-  - Description: NES/Famicom emulator with comprehensive debugging tools, PPU viewer, memory viewer, breakpoints, and Lua scripting support. Supports both GUI and command-line operation.
+  - Description: NES/Famicom emulator with comprehensive debugging tools.
 
 - **Nestopia UE**
   - URL: https://github.com/0ldsk00l/nestopia
   - Description: Accurate NES emulator.
+
+- **bsnes (SNES Emulator)**
+  - URL: https://github.com/bsnes-emu/bsnes
+  - Description: Highly accurate SNES emulator.
 
 ## Graphics Tools
 
@@ -198,7 +235,7 @@ Official and authoritative resources for NES programming and development.
 
 - **Aseprite (Sprite Editor)**
   - URL: https://www.aseprite.org/
-  - Description: Professional sprite editor (supports NES palette).
+  - Description: Professional sprite editor (supports NES/SNES palettes).
 
 ## Testing & Hardware Accuracy
 
@@ -278,9 +315,9 @@ Official and authoritative resources for NES programming and development.
 
 ## License
 
-This reference list is maintained as part of the NES Programming Knowledge Base project. All external links are provided for educational purposes. Please verify link validity and respect the terms of use for each resource.
+This reference list is maintained as part of the S-NES project. All external links are provided for educational purposes. Please verify link validity and respect the terms of use for each resource.
 
 ---
 
 **Last Updated**: 2024
-**Maintained By**: NES Programming Knowledge Base Contributors
+**Maintained By**: S-NES Contributors

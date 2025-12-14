@@ -1,13 +1,17 @@
 # Hello World NES Program
 
-A complete NES program that displays text using a full alphabet/lexicon (A-Z, 0-9, punctuation). The code follows NES documentation best practices and includes a text rendering system.
+A complete NES program that displays text using a full alphabet/lexicon (A-Z, 0-9, punctuation). The code follows S-NES documentation best practices and includes a text rendering system.
+
+## Overview
+
+This program demonstrates complete text rendering on the NES with a full character set. It serves as a foundational example for understanding NES programming within the S-NES codebase.
 
 ## Features
 
 - **Complete Alphabet/Lexicon**: All uppercase letters (A-Z), numbers (0-9), and common punctuation
 - **Text Rendering System**: Write any text string to the name table
 - **Character Lookup**: Efficient ASCII to tile index conversion
-- **NES Best Practices**: Follows official documentation patterns
+- **S-NES Best Practices**: Follows official S-NES documentation patterns
 - **Clean Code Structure**: Well-organized with clear sections and comments
 
 ## Architecture
@@ -152,12 +156,23 @@ The program follows NES documentation initialization sequence:
 4. Load palette and background
 5. Enable rendering during VBlank
 
+## Optimization Techniques
+
+This program uses advanced optimization techniques from S-NES documentation:
+
+- **Zero Page Variables**: All frequently accessed data in zero page ($0000-$00FF)
+- **Lookup Tables**: Character-to-tile conversion uses lookup table (4 cycles vs 10+ cycles with branches)
+- **Register Reuse**: Keep values in A, X, Y registers to avoid memory access
+- **Efficient Branches**: Not-taken preferred, early exits, no JMP in loops
+- **Sequential Memory Access**: Optimized memory access patterns
+- **Fastest Addressing Modes**: Immediate, zero page, indexed addressing
+
 ## Notes
 
 - Uses tile indices to display text
 - Text is positioned using name table addresses
 - All character tiles are included in CHR ROM
-- Code follows NES documentation best practices
+- Code follows S-NES documentation best practices
 - Zero page variables used for efficiency
 - Proper NMI handler with register saving
 - Hardware-accurate implementation
@@ -176,16 +191,24 @@ The program follows NES documentation initialization sequence:
 - **Text not displaying**: Verify CHR ROM contains character tiles
 - **Wrong characters**: Check character-to-tile mapping in `char_to_tile`
 
+## Related Documentation
+
+- [S-NES Main README](../../README.md) - S-NES project overview
+- [S-NES Documentation](../../docs/README.md) - Comprehensive development guide
+- [PPU Fundamentals](../../docs/01-fundamentals/1.4-ppu-fundamentals.md) - Name table and rendering details
+- [Rendering Architecture](../../docs/03-core-concepts/3.3-rendering-architecture.md) - PPU update patterns
+- [Welcome Project](../welcome/README.md) - Centered text display example
+
 ## References
 
 This code follows patterns from:
-- NES Programming Knowledge Base documentation
+- S-NES documentation
 - Official NES hardware documentation
 - Best practices for 6502 assembly on NES
 
 ## License
 
-This project is part of the NES Programming Knowledge Base and is licensed under the MIT License.
+This project is part of S-NES and is licensed under the MIT License.
 
 ---
 

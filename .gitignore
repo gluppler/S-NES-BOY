@@ -25,6 +25,13 @@ Desktop.ini
 *.map
 *.cfg.bak
 
+# Generated images and screenshots
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+
 # Temporary files
 *.tmp
 *.log

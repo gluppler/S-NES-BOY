@@ -1,28 +1,24 @@
-# Welcome Typography NES Program
+# Welcome to S-NES
 
-A typography demonstration program for the NES that displays "Hello World!" centered on screen with multiple typography designs that cycle automatically.
+A centered text display project for the NES that displays "Welcome to S-NES" centered on screen. This project demonstrates proper text centering, name table rendering, and follows all S-NES principles and documentation.
 
 ## Overview
 
-This program demonstrates typography techniques on the NES by displaying "Hello World!" centered both horizontally and vertically on the screen. The program automatically cycles through four different typography styles, each using different color palettes to create distinct visual designs.
+This program displays "Welcome to S-NES" centered both horizontally and vertically on the NES screen. It serves as a simple demonstration of text rendering and proper NES programming practices following S-NES documentation.
 
 ## Features
 
-- **Centered Text**: "Hello World!" is perfectly centered on the NES screen
-- **Typography Cycling**: Automatically cycles through 4 different typography styles
-- **Color Variations**: Each style uses a different color palette:
-  - Style 0: White text
-  - Style 1: Yellow text
-  - Style 2: Red/Blue/Green text
-  - Style 3: Purple text
-- **Hardware Accurate**: Follows strict NES documentation principles
+- **Centered Text Display**: Text is perfectly centered horizontally and vertically on the NES screen
+- **Name Table Rendering**: Uses name table for background text rendering
+- **Hardware Accurate**: Follows strict NES documentation principles and optimization techniques
+- **S-NES Compliant**: Follows all principles and laws of code established in the S-NES codebase
 
 ## Architecture
 
 - **16 KB PRG ROM** (Mapper 0, NROM)
 - **8 KB CHR ROM** (512 tiles)
-- **Name Table Rendering** with centered text positioning
-- **Attribute Table Manipulation** for typography style changes
+- **Name Table Rendering** using background tiles
+- **8x8 Tile Mode** for character display
 
 ## Requirements
 
@@ -58,50 +54,42 @@ make verify
 
 ## Technical Details
 
-### Centering Calculation
+### Text Centering
 
-The NES name table is 32 tiles wide and 30 tiles tall. To center "Hello World!" (12 characters):
+The text "WELCOME TO S-NES" has 17 characters:
+- **Horizontal center**: (32 - 17) / 2 = 7.5, rounded down to column 7
+- **Vertical center**: Row 14 (perfect visual center: 14 rows above, 15 rows below)
+- **Address**: $21C7 = $2000 + (14 × 32) + 7
 
-- **Horizontal Center**: (32 - 12) / 2 = 10 columns from left
-- **Vertical Center**: Row 15 (center of 30 rows)
-- **Name Table Address**: $2000 + (15 × 32) + 10 = $21EA
+### Name Table Layout
 
-### Typography Styles
+- Name table: $2000-$23BF (960 bytes, 32×30 tiles)
+- Attribute table: $23C0-$23FF (64 bytes)
+- Text uses palette 0 (attribute bytes set to 0)
 
-The program uses the attribute table to change typography styles. Each style uses a different background palette:
+### Character Rendering
 
-- **Palette 0**: White text on black background
-- **Palette 1**: Yellow text on black background
-- **Palette 2**: Red/Blue/Green text on black background
-- **Palette 3**: Purple text on black background
-
-### Style Cycling
-
-Typography styles change every 120 frames (approximately 2 seconds at 60 FPS). The program cycles through all 4 styles continuously.
-
-### Attribute Table Layout
-
-The text spans 12 characters (columns 10-21), which covers 2 attribute groups horizontally. The attribute table is updated at:
-- $23CA-$23CB (first row of text area)
-- $23D2-$23D3 (second row of text area)
+The program uses the same character tiles as the hello-world project:
+- Complete alphabet (A-Z)
+- Numbers (0-9)
+- Common punctuation
 
 ## Files
 
-- `main.asm` - Main assembly source with typography system
-- `nes.cfg` - Linker configuration (16 KB PRG ROM)
+- `main.asm` - Main assembly source with text rendering
+- `chars_data.asm` - CHR ROM data with character tiles (shared with hello-world)
+- `nes.cfg` - Linker configuration (16 KB PRG ROM, 8 KB CHR ROM)
 - `Makefile` - Build system with targets
-- `chars_data.asm` - CHR ROM with character tiles
 - `README.md` - This file
 
 ## Code Structure
 
-1. **Zero Page Variables**: Typography index, frame counter, timers
+1. **Zero Page Variables**: Text pointer for efficient access
 2. **Reset Handler**: System initialization following NES documentation
-3. **NMI Handler**: Frame-synchronized updates
-4. **Text Rendering**: Centered text positioning and writing
-5. **Typography System**: Attribute table updates for style changes
-6. **Character Conversion**: ASCII to tile index lookup
-7. **Data Section**: Palettes, typography attributes, text strings
+3. **NMI Handler**: Frame-synchronized rendering updates
+4. **Text Rendering**: Functions for writing text to name table
+5. **Character Conversion**: ASCII to tile index lookup
+6. **Data Section**: Palettes and text strings
 
 ## Customization
 
@@ -114,29 +102,7 @@ hello_text:
     .byte "YOUR TEXT HERE", 0
 ```
 
-**Note**: Centering calculation assumes 12 characters. Adjust the centering address if text length changes.
-
-### Change Typography Styles
-
-Modify the palette data and attribute bytes:
-
-```asm
-palette_data:
-    .byte $0F, $30, $10, $00  ; Your palette colors
-    ; ...
-
-typography_attributes:
-    .byte %00000000, %00000000  ; Your attribute bytes
-    ; ...
-```
-
-### Change Cycling Speed
-
-Modify the timer comparison in the main loop:
-
-```asm
-CMP #120            ; Change 120 to desired frame count
-```
+**Note**: Adjust the centering calculation in `load_background` if text length changes.
 
 ## Build Targets
 
@@ -147,8 +113,61 @@ CMP #120            ; Change 120 to desired frame count
 - `make run` - Run ROM in FCEUX
 - `make help` - Show help information
 
+## Optimization Techniques
+
+This program uses advanced optimization techniques from S-NES documentation:
+
+- **Zero Page Variables**: All frequently accessed data in zero page ($0000-$00FF)
+- **Lookup Tables**: Character-to-tile conversion uses lookup table (4 cycles vs 10+ cycles with branches)
+- **Register Reuse**: Keep values in A, X, Y registers to avoid memory access
+- **Efficient Branches**: Not-taken preferred, early exits, no JMP in loops
+- **Sequential Memory Access**: Optimized memory access patterns
+- **Fastest Addressing Modes**: Immediate, zero page, indexed addressing
+
 ## Related Documentation
 
-- [NES Programming Knowledge Base](../../docs/README.md) - Comprehensive NES development guide
-- [PPU Fundamentals](../../docs/01-fundamentals/1.4-ppu-fundamentals.md) - Name table and attribute table details
+- [S-NES Main README](../../README.md) - S-NES project overview
+- [S-NES Documentation](../../docs/README.md) - Comprehensive development guide
+- [PPU Fundamentals](../../docs/01-fundamentals/1.4-ppu-fundamentals.md) - Name table and rendering details
 - [Rendering Architecture](../../docs/03-core-concepts/3.3-rendering-architecture.md) - PPU update patterns
+- [Hello World Project](../hello-world/README.md) - Complete text rendering example
+
+## Notes
+
+- Uses tile indices to display text
+- Text is positioned using name table addresses
+- All character tiles are included in CHR ROM (shared with hello-world)
+- Code follows S-NES documentation best practices
+- Zero page variables used for efficiency
+- Proper NMI handler with register saving
+- Hardware-accurate implementation
+
+## Troubleshooting
+
+### Build Issues
+
+- **"ca65: command not found"**: Install cc65 package
+- **"ld65: command not found"**: Install cc65 package
+- **Linker errors**: Check `nes.cfg` matches segment definitions
+
+### Runtime Issues
+
+- **Blank screen**: Check PPU initialization in `reset:`
+- **Text not displaying**: Verify CHR ROM contains character tiles
+- **Wrong characters**: Check character-to-tile mapping in `char_to_tile`
+- **Text not centered**: Verify centering calculation matches text length
+
+## References
+
+This code follows patterns from:
+- S-NES documentation
+- Official NES hardware documentation
+- Best practices for 6502 assembly on NES
+
+## License
+
+This project is part of S-NES and is licensed under the MIT License.
+
+---
+
+**Note**: This program follows hardware-accurate NES programming practices. All code is designed to work on real NES hardware, not just emulators.

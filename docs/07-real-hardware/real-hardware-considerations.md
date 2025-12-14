@@ -1,5 +1,14 @@
 # Real Hardware Considerations
 
+## System Applicability
+
+**This document applies to:**
+- ✅ **NES**: Primary focus
+- ✅ **Famicom**: Fully applicable (same hardware, different cartridge connector)
+- ⚠️ **SNES**: Partially applicable (different flashcarts, different hardware considerations)
+
+**Note**: SNES has different flashcart options (Everdrive SD2SNES, etc.) and different hardware characteristics. This document focuses on NES/Famicom hardware.
+
 ## Flashcarts
 
 **Flashcarts** allow running homebrew ROMs on real NES hardware.

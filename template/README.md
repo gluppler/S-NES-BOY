@@ -1,6 +1,6 @@
-# NES Template
+# S-NES Template
 
-A minimal, working NES program template ready for immediate use. This template provides a complete foundation for NES development with proper initialization, NMI handling, and frame synchronization.
+A minimal, working NES program template ready for immediate use. This template provides a complete foundation for NES development with proper initialization, NMI handling, and frame synchronization, following all S-NES principles and documentation.
 
 ## Overview
 
@@ -13,6 +13,7 @@ This template includes:
 - **Palette loading**: Default palette configuration
 - **Empty CHR ROM**: 8 KB empty pattern table ready for your graphics
 - **Build system**: Makefile for easy compilation
+- **S-NES Compliant**: Follows all principles and laws of code established in the S-NES codebase
 
 ## Files
 
@@ -173,6 +174,16 @@ After building, the template produces a working NES ROM that:
 - Provides frame synchronization
 - Has empty screen (ready for your graphics)
 
+## Optimization Techniques
+
+This template follows S-NES optimization principles:
+
+- **Zero Page Variables**: Frequently accessed data in zero page
+- **Efficient Branches**: Not-taken preferred, early exits
+- **Register Reuse**: Keep values in A, X, Y registers
+- **Sequential Memory Access**: Optimized memory patterns
+- **Fastest Addressing Modes**: Immediate, zero page, indexed
+
 ## Troubleshooting
 
 ### Build Errors
@@ -195,15 +206,23 @@ After building, the template produces a working NES ROM that:
 4. Customize palette colors
 5. Add background tiles
 
+## Related Documentation
+
+- [S-NES Main README](../README.md) - S-NES project overview
+- [S-NES Documentation](../docs/README.md) - Complete development guide
+- [NES System Overview](../docs/01-fundamentals/1.1-nes-system-overview.md) - Hardware basics
+- [NMI & VBlank Discipline](../docs/02-advanced-fundamentals/2.2-nmi-vblank-discipline.md) - Interrupt handling
+- [References](../REFERENCES.md) - External resources and links
+
 ## Resources
 
-- [NES Documentation](../docs/README.md) - Complete NES programming guide
+- [S-NES Documentation](../docs/README.md) - Complete S-NES programming guide
 - [References](../REFERENCES.md) - External resources and links
 - [NesDev Wiki](https://www.nesdev.org/) - Official NES development wiki
 
 ## License
 
-This template is part of the NES Programming Knowledge Base project and is licensed under the MIT License.
+This template is part of S-NES and is licensed under the MIT License.
 
 ---
 

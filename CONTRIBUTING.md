@@ -1,6 +1,6 @@
-# Contributing to NES Programming Knowledge Base
+# Contributing to S-NES
 
-Thank you for your interest in contributing! This document provides guidelines and instructions for contributing to this project.
+Thank you for your interest in contributing! This document provides guidelines and instructions for contributing to S-NES, a codebase dedicated to learning and development of NES, SNES, and Famicom systems and programming.
 
 ## Code of Conduct
 
@@ -93,11 +93,13 @@ Each documentation file should include:
 ### Areas for Contribution
 
 - **Documentation improvements**: Clarifications, corrections, additional examples
-- **New sections**: Expanding coverage of NES programming topics
+- **New sections**: Expanding coverage of NES, SNES, and Famicom programming topics
+- **SNES content**: Adding SNES-specific documentation and examples
+- **Famicom content**: Documenting Famicom-specific features
 - **Code examples**: Better or more comprehensive examples
 - **Cheatsheets**: Additional reference tables or quick guides
 - **Tooling**: Improvements to development workflow documentation
-- **Real hardware**: Additional real hardware considerations
+- **Real hardware**: Additional real hardware considerations for all systems
 
 ### Questions?
 
@@ -106,4 +108,4 @@ If you have questions about contributing, please:
 - Check existing issues and discussions
 - Review the documentation in `docs/README.md`
 
-Thank you for contributing to the NES Programming Knowledge Base!
+Thank you for contributing to S-NES!

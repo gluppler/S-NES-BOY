@@ -1,7 +1,7 @@
 ; ============================================================================
 ; APU Initialization
 ; ============================================================================
-; Per NES documentation: APU initialization
+; SNES hardware behavior: APU initialization
 ; ============================================================================
 
 .include "constants/apu.inc"

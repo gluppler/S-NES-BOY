@@ -25,7 +25,7 @@ List the files that were modified:
 - `path/to/file.md`
 
 ## Checklist
-- [ ] My changes follow the project's style guidelines
+- [ ] My changes follow the framework's style guidelines
 - [ ] I have reviewed my own changes
 - [ ] I have added appropriate cross-references
 - [ ] I have tested that markdown renders correctly

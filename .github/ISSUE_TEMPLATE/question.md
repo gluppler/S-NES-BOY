@@ -1,6 +1,6 @@
 ---
 name: Question
-about: Ask a question about NES programming or the documentation
+about: Ask a question about NES, SNES, or Game Boy programming, or the framework documentation
 title: '[QUESTION] '
 labels: question
 assignees: ''

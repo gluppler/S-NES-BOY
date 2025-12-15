@@ -1,7 +1,7 @@
 ; ============================================================================
 ; State Machine
 ; ============================================================================
-; Per NES documentation: Game state management
+; SNES hardware behavior: Game state management
 ; ============================================================================
 
 .include "memory/zeropage.inc"

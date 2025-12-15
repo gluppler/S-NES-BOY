@@ -1,98 +1,126 @@
 ; ============================================================================
 ; Reset Handler
 ; ============================================================================
-; Per NES documentation: Initialize system, clear RAM, setup PPU
-; Must follow exact sequence for hardware compatibility
+; SNES hardware initialization sequence
+; Based on snes-hello canonical patterns
 ; ============================================================================
 
-.include "memory/zeropage.inc"
-.include "memory/ram.inc"
-.include "memory/oam.inc"
-.include "constants/cpu.inc"
-.include "constants/ppu.inc"
+.p816   ; 65816 processor
+.i16    ; X/Y are 16 bits
+.a8     ; A is 8 bits
 
-reset:
-    ; Disable interrupts and initialize CPU
-    SEI                 ; Disable interrupts (per NES documentation: required first)
-    CLD                 ; Clear decimal mode (6502 specific: NES doesn't use BCD)
-    LDX #STACK_INIT
-    TXS                 ; Initialize stack pointer to $01FF
-    INX                 ; X = 0 (for clearing RAM)
-    
-    ; Disable PPU rendering
-    ; Per NES documentation: Must disable before VRAM access to prevent corruption
-    STX PPUCTRL         ; Disable NMI (PPUCTRL = 0)
-    STX PPUMASK         ; Disable rendering (PPUMASK = 0)
-    STX $4010           ; Disable DMC IRQ
-    
-    ; Wait for PPU to stabilize
-    ; Per NES documentation: Wait 2 VBlanks to ensure PPU is ready
-    BIT PPUSTATUS       ; Clear VBlank flag
-vblank_wait1:
-    BIT PPUSTATUS
-    BPL vblank_wait1    ; Wait for VBlank flag to be set (bit 7)
-    
-    ; Clear RAM
-    ; Per NES documentation: Initialize all RAM to known state ($0000-$07FF)
-    LDA #0
-clear_ram:
-    STA $0000,X         ; Zero page
-    STA $0100,X         ; Stack
-    STA $0200,X         ; OAM buffer
-    STA $0300,X         ; RAM
-    STA $0400,X         ; RAM
-    STA $0500,X         ; RAM
-    STA $0600,X         ; RAM
-    STA $0700,X         ; RAM
-    INX
-    BNE clear_ram       ; Loop until X wraps to 0 (256 iterations)
-    
-    ; Wait for second VBlank
-    ; Per NES documentation: Ensures PPU is fully stabilized
-vblank_wait2:
-    BIT PPUSTATUS
-    BPL vblank_wait2
-    
-    ; Initialize PPU registers
-    ; Per NES documentation: Set up PPU before enabling rendering
-    LDA #(PPUCTRL_NMI_ENABLE | PPUCTRL_NAMETABLE_0)
-    STA PPUCTRL
-    STA ppu_ctrl        ; Store for later updates
-    LDA #(PPUMASK_SHOW_BG | PPUMASK_SHOW_SPRITES | PPUMASK_SHOW_BG_LEFT)
-    STA PPUMASK
-    
-    ; Initialize game state variables
-    LDA #0
-    STA frame_counter
-    STA frame_ready
-    STA scroll_x
-    STA scroll_y
-    
-    ; Initialize sprite system
-    JSR init_sprites
-    
-    ; Initialize game state
-    JSR init_game_state
-    
-    ; Load palette
-    JSR load_palette
-    
-    ; Load background (optional)
-    ; JSR load_background
-    
-    ; Wait for VBlank before enabling rendering
-    ; Per NES documentation: Ensures first frame renders correctly
-vblank_wait3:
-    BIT PPUSTATUS
-    BPL vblank_wait3
-    
-    ; Set scroll registers
-    ; Per NES documentation: Must be set before enabling rendering
-    LDA PPUSTATUS       ; Reset scroll latch (read PPUSTATUS)
-    LDA #0              ; Scroll value
-    STA PPUSCROLL       ; X scroll = 0
-    STA PPUSCROLL       ; Y scroll = 0
-    
-    ; Enter main loop
-    ; Per NES documentation: Game loop pattern with frame synchronization
-    JMP main_loop
+.include "../headers/constants/snes.inc"
+
+; Import symbols from other modules
+.import game_loop
+.import NESfont
+.importzp VRAM_CHARSET, VRAM_BG1
+
+; Export start entry point
+.export start
+start:
+   clc             ; native mode
+   xce
+   rep #$10        ; X/Y 16-bit
+   sep #$20        ; A 8-bit
+
+   ; Clear registers
+   ldx #$33
+
+   jsr ClearVRAM
+
+@loop:
+   stz INIDISP,x
+   stz NMITIMEN,x
+   dex
+   bpl @loop
+
+   lda #128
+   sta INIDISP ; undo the accidental stz to 2100h due to BPL actually being a branch on nonnegative
+
+   ; Set palette to black background and 3 shades of red
+   stz CGADD ; start with color 0 (background)
+   stz CGDATA ; None more black
+   stz CGDATA
+   lda #$10 ; Color 1: dark red
+   sta CGDATA
+   stz CGDATA
+   lda #$1F ; Color 2: neutral red
+   sta CGDATA
+   stz CGDATA
+   lda #$1F  ; Color 3: light red
+   sta CGDATA
+   lda #$42
+   sta CGDATA
+
+   ; Setup Graphics Mode 0, 8x8 tiles all layers
+   stz BGMODE
+   lda #>VRAM_BG1
+   sta BG1SC ; BG1 at VRAM_BG1, only single 32x32 map (4-way mirror)
+   lda #((>VRAM_CHARSET >> 4) | (>VRAM_CHARSET & $F0))
+   sta BG12NBA ; BG 1 and 2 both use char tiles
+
+   ; Load character set into VRAM
+   lda #$80
+   sta VMAIN   ; VRAM stride of 1 word
+   ldx #VRAM_CHARSET
+   stx VMADDL
+   ldx #0
+@charset_loop:
+   lda NESfont,x
+   stz VMDATAL ; color index low bit = 0
+   sta VMDATAH ; color index high bit set -> neutral red (2)
+   inx
+   cpx #(128*8)
+   bne @charset_loop
+
+   ; Enable display
+   lda #$01
+   sta TM          ; Show BG1
+   lda #$0F
+   sta INIDISP     ; Maximum brightness
+
+   ; enable NMI for Vertical Blank
+   lda #$80
+   sta NMITIMEN
+
+   ; Enter main loop (forward reference - defined in main.asm after this include)
+   ; Note: This will be resolved at link time
+   jmp game_loop
+
+;----------------------------------------------------------------------------
+; ClearVRAM -- Sets every byte of VRAM to zero
+; from bazz's VRAM tutorial
+; In: None
+; Out: None
+; Modifies: flags
+;----------------------------------------------------------------------------
+ClearVRAM:
+   pha
+   phx
+   php
+
+   REP #$30		; mem/A = 8 bit, X/Y = 16 bit
+   SEP #$20
+
+   LDA #$80
+   STA $2115         ;Set VRAM port to word access
+   LDX #$1809
+   STX $4300         ;Set DMA mode to fixed source, WORD to $2118/9
+   LDX #$0000
+   STX $2116         ;Set VRAM port address to $0000
+   STX $0000         ;Set $00:0000 to $0000 (assumes scratchpad ram)
+   STX $4302         ;Set source address to $xx:0000
+   LDA #$00
+   STA $4304         ;Set source bank to $00
+   LDX #$FFFF
+   STX $4305         ;Set transfer size to 64k-1 bytes
+   LDA #$01
+   STA $420B         ;Initiate transfer
+
+   STZ $2119         ;clear the last byte of the VRAM
+
+   plp
+   plx
+   pla
+   RTS

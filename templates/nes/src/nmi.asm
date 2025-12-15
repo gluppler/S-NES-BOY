@@ -9,6 +9,7 @@
 .include "memory/oam.inc"
 .include "constants/ppu.inc"
 
+.export nmi
 nmi:
     ; Save CPU registers
     ; Per NES documentation: NMI can interrupt main loop, must preserve state

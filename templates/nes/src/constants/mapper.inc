@@ -4,6 +4,9 @@
 ; Per NES documentation: Mapper constants for iNES header
 ; ============================================================================
 
+.ifndef MAPPER_CONSTANTS_INC
+MAPPER_CONSTANTS_INC = 1
+
 ; Mapper IDs
 MAPPER_NROM = 0         ; NROM (Mapper 0) - No mapper
 MAPPER_MMC1 = 1         ; MMC1 (Mapper 1)
@@ -21,3 +24,5 @@ BATTERY_PRESENT = %00000010
 ; TV system
 TV_NTSC = 0
 TV_PAL = 1
+
+.endif ; MAPPER_CONSTANTS_INC

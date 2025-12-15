@@ -1,6 +1,6 @@
 # Contributors
 
-Thank you to all the contributors who have helped make this project better!
+Thank you to all the contributors who have helped make the S-NES-BOY Learning & Development Framework better!
 
 ## How to Add Yourself
 

@@ -1,7 +1,7 @@
 ; ============================================================================
 ; Input Debouncing
 ; ============================================================================
-; Per NES documentation: Debouncing for controller input
+; SNES hardware behavior: Debouncing for controller input
 ; Optional: Use if you need debouncing for specific buttons
 ; ============================================================================
 

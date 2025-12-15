@@ -1,9 +1,12 @@
 ; ============================================================================
 ; Stack Memory Definitions
 ; ============================================================================
-; Per NES documentation: Stack is at $0100-$01FF
+; SNES hardware behavior: Stack is at $0100-$01FF
 ; Stack pointer initialized to $01FF (grows downward)
 ; ============================================================================
+
+.ifndef SNES_STACK_INC
+SNES_STACK_INC = 1
 
 STACK_BASE = $01FF      ; Stack base address (top of stack)
 STACK_SIZE = 256        ; Stack size (256 bytes)
@@ -13,3 +16,5 @@ STACK_SIZE = 256        ; Stack size (256 bytes)
 ; - Stack is used for interrupt handling (PHA, PLA, etc.)
 ; - Stack grows downward (decrements on push, increments on pop)
 ; - Stack pointer wraps around (SP=$00 after 256 pushes from $FF)
+
+.endif ; SNES_STACK_INC

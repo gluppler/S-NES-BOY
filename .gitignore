@@ -20,9 +20,15 @@ Desktop.ini
 # Build artifacts
 *.o
 *.nes
+*.sfc
+*.gb
 *.bin
 *.lst
+*.list
+*.mmap
 *.map
+*.srm
+*.bsz
 *.cfg.bak
 
 # Generated images and screenshots

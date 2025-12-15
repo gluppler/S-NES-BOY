@@ -1,20 +1,20 @@
 ; ============================================================================
 ; Attribute Table Management
 ; ============================================================================
-; Per NES documentation: Attribute table utilities
+; SNES hardware behavior: Attribute table utilities
+; Note: This file is a placeholder - SNES doesn't use NES-style attribute tables
+; SNES uses CGRAM (Color Generator RAM) for palettes instead
 ; ============================================================================
 
 .include "constants/ppu.inc"
 .include "memory/zeropage.inc"
 
 ; ============================================================================
-; Write Attribute Byte
+; Write Attribute Byte (Placeholder)
 ; ============================================================================
-; Input: A = high byte of attribute address, X = low byte, Y = attribute value
+; SNES doesn't use attribute tables like NES
+; This is kept for compatibility but should be replaced with SNES-specific code
 ; ============================================================================
 write_attribute:
-    PHA                 ; Save attribute value
-    JSR set_ppu_address ; Set PPU address (A=high, X=low)
-    PLA                 ; Restore attribute value
-    STA PPUDATA         ; Write attribute byte
+    ; ADD CODE HERE: Implement SNES-specific attribute/palette management
     RTS

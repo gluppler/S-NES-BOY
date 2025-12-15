@@ -2,7 +2,7 @@
 ; Controller Input Library
 ; ============================================================================
 ; Per NES documentation: Controller reading via shift register
-; Follows established patterns from hello-world and welcome projects
+; Follows established patterns from hello-world example
 ; ============================================================================
 
 .include "constants/controller.inc"

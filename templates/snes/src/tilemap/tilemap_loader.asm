@@ -1,7 +1,7 @@
 ; ============================================================================
 ; Tilemap Loader
 ; ============================================================================
-; Per NES documentation: Load tilemap to name table
+; SNES hardware behavior: Load tilemap to name table
 ; ============================================================================
 
 .include "memory/zeropage.inc"

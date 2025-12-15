@@ -7,6 +7,9 @@
 ; Memory layout follows data-oriented design principles
 ; ============================================================================
 
+.ifndef ZEROPAGE_INC
+ZEROPAGE_INC = 1
+
 ; Temporary variables
 zp_temp = $00           ; Temporary variable
 zp_temp2 = $01          ; Second temporary variable
@@ -30,3 +33,5 @@ ppu_ctrl = $08          ; PPU control register value
 ;   player_y = $0A       ; Player Y position
 ;   score = $0B          ; Score (low byte)
 ;   score_high = $0C    ; Score (high byte)
+
+.endif ; ZEROPAGE_INC

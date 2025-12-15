@@ -13,10 +13,10 @@
 ; Sets sprite X and Y position in state arrays
 ; Parameters: index (sprite index 0-63), x (X position), y (Y position)
 ; ============================================================================
-.macro set_sprite_pos index, x, y
-    LDA #x
+.macro set_sprite_pos index, xpos, ypos
+    LDA #xpos
     STA sprite_x + index
-    LDA #y
+    LDA #ypos
     STA sprite_y + index
 .endmacro
 
@@ -72,8 +72,8 @@
 ; Initializes a sprite with position, tile, and attributes
 ; Parameters: index, x, y, tile, attr
 ; ============================================================================
-.macro init_sprite index, x, y, tile, attr
-    set_sprite_pos index, x, y
+.macro init_sprite index, xpos, ypos, tile, attr
+    set_sprite_pos index, xpos, ypos
     set_sprite_tile index, tile
     set_sprite_attr index, attr
     set_sprite_active index, 1
@@ -85,13 +85,13 @@
 ; Writes sprite data directly to OAM buffer
 ; Parameters: offset (OAM buffer offset), y, tile, attr, x
 ; ============================================================================
-.macro write_sprite_oam offset, y, tile, attr, x
-    LDA #y
+.macro write_sprite_oam offset, ypos, tile, attr, xpos
+    LDA #ypos
     STA OAM_BUFFER + offset
     LDA #tile
     STA OAM_BUFFER + offset + 1
     LDA #attr
     STA OAM_BUFFER + offset + 2
-    LDA #x
+    LDA #xpos
     STA OAM_BUFFER + offset + 3
 .endmacro

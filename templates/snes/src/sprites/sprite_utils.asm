@@ -1,7 +1,7 @@
 ; ============================================================================
 ; Sprite Utilities
 ; ============================================================================
-; Per NES documentation: Sprite management utilities
+; SNES hardware behavior: Sprite management utilities
 ; ============================================================================
 
 .include "memory/oam.inc"

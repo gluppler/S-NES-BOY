@@ -4,6 +4,9 @@
 ; Per NES documentation: 6502 CPU constants
 ; ============================================================================
 
+.ifndef CPU_CONSTANTS_INC
+CPU_CONSTANTS_INC = 1
+
 ; CPU flags
 FLAG_CARRY = %00000001
 FLAG_ZERO = %00000010
@@ -20,3 +23,5 @@ CYCLES_PER_FRAME = 29780 ; Cycles per frame (NTSC 60 Hz)
 
 ; Stack
 STACK_INIT = $FF        ; Initial stack pointer value
+
+.endif ; CPU_CONSTANTS_INC

@@ -1,8 +1,11 @@
 ; ============================================================================
 ; PPU Constants
 ; ============================================================================
-; Per NES documentation: PPU register addresses and constants
+; SNES hardware behavior: PPU register addresses and constants
 ; ============================================================================
+
+.ifndef SNES_PPU_CONSTANTS_INC
+SNES_PPU_CONSTANTS_INC = 1
 
 ; PPU registers
 PPUCTRL = $2000         ; PPU control register
@@ -63,3 +66,5 @@ NAMETABLE_WIDTH = 32    ; 32 tiles wide
 NAMETABLE_HEIGHT = 30   ; 30 tiles tall
 NAMETABLE_SIZE = 960    ; 960 bytes (32 × 30)
 ATTRTABLE_SIZE = 64     ; 64 bytes
+
+.endif ; SNES_PPU_CONSTANTS_INC

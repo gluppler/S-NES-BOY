@@ -1,7 +1,7 @@
 ; ============================================================================
 ; Input State Definitions
 ; ============================================================================
-; Per NES documentation: Controller state storage
+; SNES hardware behavior: Controller state storage
 ; ============================================================================
 
 ; Controller state addresses (defined in constants/controller.inc)

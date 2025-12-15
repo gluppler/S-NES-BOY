@@ -4,6 +4,9 @@
 ; Character to tile index lookup table
 ; ============================================================================
 
+.ifndef SNES_FONT_MAP_INC
+SNES_FONT_MAP_INC = 1
+
 ; Character to Tile Index Lookup Table
 ; Maps ASCII character (32-122) to tile index
 char_to_tile_table:
@@ -24,3 +27,5 @@ row_address_table:
     .byte $00, $20, $40, $60, $80, $A0, $C0, $E0  ; Rows 8-15
     .byte $00, $20, $40, $60, $80, $A0, $C0, $E0  ; Rows 16-23
     .byte $00, $20, $40, $60, $80, $A0            ; Rows 24-29
+
+.endif ; SNES_FONT_MAP_INC

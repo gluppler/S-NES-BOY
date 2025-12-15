@@ -1,7 +1,7 @@
 ; ============================================================================
 ; Text Printing
 ; ============================================================================
-; Per NES documentation: Text rendering to name table
+; SNES hardware behavior: Text rendering to name table
 ; ============================================================================
 
 .include "memory/zeropage.inc"

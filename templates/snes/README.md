@@ -1,65 +1,98 @@
-# S-NES-BOY SNES Template - Complete Project Suite
+# S-NES-BOY SNES Development Template
 
-A full-featured SNES project template with comprehensive modular architecture, ready for immediate use. This template provides a complete foundation for SNES development with proper initialization, NMI handling, frame synchronization, and a comprehensive library system, following all S-NES-BOY principles and documentation.
+Production-ready SNES development template for the S-NES-BOY Learning & Development Framework.
 
-**This template applies to:
-- ✅ **SNES (Super Nintendo Entertainment System): Primary focus
-- ✅ **Super: Fully compatible (same hardware)
-- ❌ **NES: Does not apply (see `../nes/` for NES template)
+## Scope
 
-## Overview
+This template is part of the S-NES-BOY framework and provides a complete, hardware-accurate starting point for SNES development using the 65C816 CPU. It is designed to boot under real hardware conditions, enter native 65816 mode explicitly, configure banks correctly, and upload data to VRAM safely.
 
-This template includes:
+## Directory Layout
 
-- **Complete SNES initialization: Proper reset sequence, RAM clearing, PPU setup
-- **NMI handler: Frame-synchronized interrupt handler for rendering updates
-- **Main loop: Frame-based game loop with proper synchronization
-- **Modular architecture: Organized directory structure
-- **Memory management: WRAM, VRAM, CGRAM, OAM definitions
-- **Constants system: CPU (65816), PPU, APU (SPC700), controller, and mapper constants
-- **Input system: Controller input with pressed/released detection
-- **State machine: Game state management system
-- **Screen modules: Welcome, menu, game, pause, and ending screens
-- **PPU system: Initialization, writing, scrolling, and attributes
-- **Sprite system: DMA, buffer management, and utilities
-- **Text system: Font mapping, printing, and centered text
-- **Palette system: Data, loading, and fading (CGRAM)
-- **Tilemap system: Definitions, loading, metatiles, and collision
-- **Audio system: SPC700 initialization, music, and sound effects
-- **Game logic: Entities, collisions, and rules
-- **Build system: Makefile with organized output directory
-- **S-NES-BOY Compliant**: Follows all principles and laws of code established in the S-NES-BOY codebase
+The SNES template uses the following layout:
 
-## Quick Start
+- `build/` – Build scripts and notes
+- `src/` – SNES source code (reset, initialization, main loop, interrupts, subsystems)
+- `assets/` – Tile, tilemap, and palette data used by the ROM
+- `linker/` – Linker scripts and memory maps
+- `headers/` – Hardware register definitions and memory layout includes
+- `macros/` – Assembly macros and reusable patterns
+- `tools/` – Helper tools and scripts
+- `config/` – ROM configuration files (mapping mode, banks, build options)
+- `rom/` – Output ROM images
 
-1. **Build the ROM:
-   ```bash
-   make
-   ```
-   This creates `build/rom/game.sfc`
+## Template Contents
 
-2. **Run in emulator:
-   ```bash
-   make run
-   ```
+- Reset vector and entry point in `src/` with explicit 65816 mode selection
+- Hardware initialization for CPU, PPU, memory, and VRAM paths
+- Main loop and NMI handler for frame-based execution
+- Separate modules for input, state management, screens, PPU, sprites, text, palettes, tilemaps, and audio
+- Linker configuration in `linker/` for LoROM mapping
+- Headers in `headers/` describing WRAM, VRAM, CGRAM, and OAM layout
+- Macros in `macros/` for timing, memory operations, PPU operations, and register management
+- Build system in `Makefile` that produces a deterministic `.sfc` ROM in `rom/`
 
-3. **Clean build files:
-   ```bash
-   make clean
-   ```
+## Building
+
+From `templates/snes/`:
+
+```bash
+make
+make run
+make clean
+```
 
 ## Requirements
 
-- **ca65** - 65816 assembler (part of cc65)
-- **ld65** - Linker (part of cc65)
-- **SNES emulator** (bsnes, snes9x, etc.)
+- `ca65` – 65816 assembler (part of cc65)
+- `ld65` – Linker (part of cc65)
+- SNES emulator such as bsnes or higan
 
-## Related Resources
+## Hardware Assumptions
 
-- [SNES Documentation](../../snes-docs/README.md) - SNES-specific documentation
-- [NES Template](../nes/README.md) - NES template for reference
-- [Main README](../../README.md) - S-NES-BOY project overview
+This template assumes:
+- LoROM mapping mode
+- Native 65816 mode (16-bit accumulator, 16-bit index registers)
+- NTSC timing
+- Standard SNES controller input
+- Mode 0 background rendering (4 BGs, 4 colors per BG)
+- All VRAM updates use DMA or occur during safe periods
+- NMI handler completes within VBlank window
 
----
+## Extending the Template
 
-**Note: This template follows hardware-accurate SNES programming practices. All code is designed to work on real SNES hardware, not just emulators.
+To extend this template:
+
+1. **Add new subsystems**: Create modules in `src/` following existing patterns
+2. **Add assets**: Place tile data, tilemaps, and palettes in `assets/`
+3. **Add macros**: Place reusable assembly macros in `macros/`
+4. **Add headers**: Place hardware definitions and constants in `headers/`
+5. **Configure mapping**: Modify `linker/` configuration for different mapping modes
+6. **Add tools**: Place asset conversion scripts in `tools/` with documentation
+
+Follow the existing code structure and maintain hardware-accurate timing constraints.
+
+## Reference Implementation
+
+This template follows patterns from the canonical snes-hello example (https://github.com/SlithyMatt/snes-hello), which demonstrates:
+
+- Correct native 65816 mode entry (`clc; xce`)
+- Proper register size configuration (`.p816`, `.i16`, `.a8`)
+- LoROM mapping with correct header placement
+- DMA-based VRAM clearing
+- Hardware-accurate PPU initialization
+
+The snes-hello patterns are integrated into the example at `examples/snes/hello_world/`, which serves as the reference for minimal SNES initialization.
+
+## Related Documentation
+
+- [Framework Overview](../../README.md) – Main framework README
+- [SNES Documentation Index](../../docs/snes/README.md) – SNES documentation index
+- [SNES Fundamentals](../../docs/snes/fundamentals/) – Core SNES hardware concepts
+- [SNES Advanced Fundamentals](../../docs/snes/advanced_fundamentals/) – Timing and constraints
+- [SNES Core Concepts](../../docs/snes/concepts/) – System interaction patterns
+- [SNES Gold Standard Examples](../../docs/snes/gold_standard/) – Reference implementations
+- [SNES Hello World Example](../../examples/snes/hello_world/) – Canonical SNES example
+
+## Philosophy
+
+The SNES template is intended to be a minimal, correct starting point for real-hardware-safe SNES projects. It follows hardware-first principles and respects all SNES timing constraints and hardware limitations.

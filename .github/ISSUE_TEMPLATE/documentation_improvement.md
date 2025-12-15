@@ -1,6 +1,6 @@
 ---
 name: Documentation Improvement
-about: Suggest an improvement or enhancement to the documentation
+about: Suggest an improvement or enhancement to the framework documentation
 title: '[DOCS] '
 labels: documentation, enhancement
 assignees: ''
@@ -17,7 +17,7 @@ Describe what you'd like to see changed or added.
 
 ## Location
 - **Section: [e.g., 3.1 The Game Loop]
-- **File: [e.g., nes-docs/03-core-concepts/3.1-the-game-loop.md or snes-docs/03-core-concepts/3.1-the-game-loop.md]
+- **File: [e.g., docs/nes/concepts/3.1-the-game-loop.md or docs/snes/concepts/3.1-the-game-loop.md]
 - **New section or modification?: [New / Modification]
 
 ## Additional Context

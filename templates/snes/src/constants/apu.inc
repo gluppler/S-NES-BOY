@@ -1,8 +1,11 @@
 ; ============================================================================
 ; APU Constants
 ; ============================================================================
-; Per NES documentation: APU register addresses and constants
+; SNES hardware behavior: APU register addresses and constants
 ; ============================================================================
+
+.ifndef SNES_APU_CONSTANTS_INC
+SNES_APU_CONSTANTS_INC = 1
 
 ; APU registers
 APU_PULSE1_CTRL = $4000
@@ -39,3 +42,5 @@ APU_STATUS_NOISE_ACTIVE = %00001000
 APU_STATUS_TRIANGLE_ACTIVE = %00000100
 APU_STATUS_PULSE2_ACTIVE = %00000010
 APU_STATUS_PULSE1_ACTIVE = %00000001
+
+.endif ; SNES_APU_CONSTANTS_INC

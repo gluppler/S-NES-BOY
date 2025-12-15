@@ -1,77 +1,79 @@
-# Game Boy Template
+# S-NES-BOY Game Boy Development Template
 
-Game Boy development template following hardware-accurate practices.
+Production-ready Game Boy development template for the S-NES-BOY Learning & Development Framework.
 
-Based on the [GB ASM Tutorial](https://gbdev.io/gb-asm-tutorial/index.html) and using the official `hardware.inc` from the tutorial.
+## Scope
 
-## Structure
+This template is part of the S-NES-BOY framework and provides a complete, hardware-accurate starting point for Game Boy development using the LR35902 CPU and the RGBDS toolchain. It targets the original Game Boy (DMG) and Game Boy Color (CGB), and is designed to include a valid cartridge header, respect LCD initialization timing, and perform VRAM writes in VBlank-safe fashion.
 
-- `src/`: Source code files
-  - `main.asm` - Main program entry point
-  - `hardware.inc` - Official hardware definitions (from GB ASM Tutorial)
-- `linker/`: Linker configuration files
-- `graphics/`: Graphics assets
-- `data/`: Data files (tilemaps, tables)
-- `debug/`: Debug utilities
-- `tests/`: Test files
-- `Makefile`: Build system with emulator auto-detection
+## Directory Layout
 
-## Usage
+The Game Boy template follows the required layout:
 
-Copy this template to create a new Game Boy project.
+- `build/` – Build scripts and notes
+- `src/` – Game Boy source code (reset, initialization, main loop, interrupts)
+- `assets/` – Tile, tilemap, and palette data used by the ROM
+- `linker/` – Linker configuration files
+- `headers/` – Hardware register definitions and memory layout includes
+- `macros/` – Assembly macros and reusable patterns
+- `tools/` – Helper tools and scripts (documented as they are added)
+- `config/` – ROM configuration and build options
+- `rom/` – Output ROM images
+
+## Template Contents
+
+- Main program and reset flow in `src/main.asm`
+- Official `hardware.inc` in `headers/` for register and constant definitions
+- Minimal Makefile that builds a deterministic `.gb` ROM into `rom/`
+- Structure ready for adding assets, macros, tools, and configuration files
 
 ## Building
 
+From `templates/gb/`:
+
 ```bash
-make              # Build ROM (auto-installs RGBDS if missing)
-make clean        # Remove build artifacts
-make run          # Run ROM in emulator (default: emulicious, auto-installs if missing)
-make run EMULATOR=emulicious  # Run with specific emulator
-make verify       # Verify ROM structure (auto-installs Python 3 if missing)
+make           # Build ROM into rom/
+make run       # Run in configured Game Boy emulator
+make clean     # Remove build outputs
 ```
 
 ## Requirements
 
-All requirements are automatically detected and installed if missing:
+- `rgbasm`, `rgblink`, `rgbfix` – RGBDS toolchain
+- Game Boy emulator such as SameBoy, BGB, or mGBA
 
-- **RGBDS** (assembler and linker)
-  - `rgbasm` - Assembler
-  - `rgblink` - Linker
-  - `rgbfix` - ROM fixer
-- **Game Boy emulator** (BGB, SameBoy, mGBA)
-  - Will be auto-installed if missing (requires package manager)
-- **Python 3** (for verify target only)
-  - Will be auto-installed if missing
+## Hardware Assumptions
 
-## Emulator Selection
+This template assumes:
+- Original Game Boy (DMG) hardware
+- RGBDS-compatible assembly syntax
+- VBlank-safe VRAM and OAM updates only
+- Standard Game Boy button input
+- LCD initialization timing respected
+- Valid cartridge header with correct checksums
 
-The Makefile supports multiple emulators:
-- `emulicious` (default) - Modern multi-system emulator with Game Boy support
-- `bgb` - Accurate Game Boy emulator
-- `sameboy` - Accurate Game Boy/Color emulator
-- `mgba` - Multi-system emulator
+## Extending the Template
 
-Usage: `make run EMULATOR=<emulator_name>`
+To extend this template:
 
-### Emulicious Notes
+1. **Add new subsystems**: Create modules in `src/` following existing patterns
+2. **Add assets**: Place tile data and tilemaps in `assets/`
+3. **Add macros**: Place reusable assembly macros in `macros/`
+4. **Add headers**: Place hardware definitions and constants in `headers/`
+5. **Configure cartridge**: Modify cartridge header settings in build process
+6. **Add tools**: Place asset conversion scripts in `tools/` with documentation
 
-- **Java Warnings**: The Makefile automatically suppresses Java native access warnings by setting `JAVA_TOOL_OPTIONS=--enable-native-access=ALL-UNNAMED`
-- **Monitor Placement**: If emulicious opens on the wrong monitor, this is typically handled by your window manager. You can:
-  - Configure your WM to remember window positions
-  - Use `wmctrl` or `xdotool` to move the window after it opens
-  - Set window placement rules in your WM configuration
+Follow the existing code structure and maintain hardware-accurate timing constraints. Ensure all VRAM writes occur during VBlank or HBlank periods.
 
-## Code Style
+## Related Documentation
 
-This template follows the GB ASM Tutorial conventions:
-- Uses official `hardware.inc` with `DEF name EQU value` syntax
-- Simple, straightforward structure
-- Audio shutdown on startup
-- Proper VBlank handling
-- Inline copy loops for efficiency
+- [Framework Overview](../../README.md) – Main framework README
+- [Game Boy Documentation Index](../../docs/gameboy/README.md) – Game Boy documentation index
+- [Game Boy Fundamentals](../../docs/gameboy/fundamentals/) – Core Game Boy hardware concepts
+- [Game Boy Advanced Fundamentals](../../docs/gameboy/advanced_fundamentals/) – Timing and constraints
+- [Game Boy Core Concepts](../../docs/gameboy/concepts/) – System interaction patterns
+- [Game Boy Gold Standard Examples](../../docs/gameboy/gold_standard/) – Reference implementations
 
-## References
+## Philosophy
 
-- [GB ASM Tutorial](https://gbdev.io/gb-asm-tutorial/index.html) - Official assembly tutorial
-- [Pan Docs](https://gbdev.io/pandocs/) - Hardware documentation
-- [RGBDS](https://rgbds.gbdev.io) - Assembler and linker documentation
+The Game Boy template is intended to be a minimal, correct starting point for real-hardware-safe Game Boy projects. It follows hardware-first principles and respects all Game Boy timing constraints and hardware limitations, including LCD mode restrictions and VBlank requirements.

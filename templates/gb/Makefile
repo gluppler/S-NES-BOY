@@ -3,17 +3,7 @@
 # ============================================================================
 # Build system for Game Boy template with modular architecture
 # Follows Game Boy documentation best practices
-#
-# Requirements:
-#   - rgbasm (assembler, part of RGBDS)
-#   - rgblink (linker, part of RGBDS)
-#   - rgbfix (ROM fixer, part of RGBDS)
-#   - Game Boy emulator (BGB, SameBoy, etc.)
-#
-# Usage:
-#   make run              - Run with default emulator (bgb)
-#   make run EMULATOR=bgb - Run with bgb
-#   make run EMULATOR=sameboy - Run with sameboy
+# Auto-installs missing dependencies
 # ============================================================================
 
 # Toolchain
@@ -22,9 +12,7 @@ LD = rgblink
 FIX = rgbfix
 
 # Emulator selection (default: emulicious)
-# Options: emulicious, bgb, sameboy, mgba
 EMULATOR ?= emulicious
-
 
 # Source files
 MAIN_SOURCE = src/main.asm
@@ -35,15 +23,51 @@ OBJECTS = $(patsubst src/%.asm,build/obj/%.o,$(shell find src -name "*.asm"))
 TARGET = build/rom/game.gb
 
 # Phony targets
-.PHONY: all clean distclean run verify help
+.PHONY: all clean distclean run verify help check-toolchain check-emu check-python
 
 # ============================================================================
-# Toolchain Detection and Installation
+# Dependency Installation
 # ============================================================================
+
+# Install package using detected package manager
+define install-package
+	@if command -v yay >/dev/null 2>&1; then \
+		echo "Installing $(1) via yay..."; \
+		yay -S --noconfirm $(1) || (echo "Installation failed. Try: yay -S $(1)" && exit 1); \
+	elif command -v paru >/dev/null 2>&1; then \
+		echo "Installing $(1) via paru..."; \
+		paru -S --noconfirm $(1) || (echo "Installation failed. Try: paru -S $(1)" && exit 1); \
+	elif command -v pacman >/dev/null 2>&1; then \
+		if pacman -Si $(1) >/dev/null 2>&1; then \
+			echo "Installing $(1) via pacman..."; \
+			sudo pacman -S --noconfirm $(1) || (echo "Installation failed. Try: sudo pacman -S $(1)" && exit 1); \
+		else \
+			echo "$(1) not in official repos. Install AUR helper (yay/paru) or: yay -S $(1)"; \
+			exit 1; \
+		fi; \
+	elif command -v apt >/dev/null 2>&1 || command -v apt-get >/dev/null 2>&1; then \
+		echo "Installing $(1) via apt..."; \
+		sudo apt-get update && sudo apt-get install -y $(1) || (echo "Installation failed. Try: sudo apt-get install $(1)" && exit 1); \
+	elif command -v dnf >/dev/null 2>&1; then \
+		echo "Installing $(1) via dnf..."; \
+		sudo dnf install -y $(1) || (echo "Installation failed. Try: sudo dnf install $(1)" && exit 1); \
+	elif command -v yum >/dev/null 2>&1; then \
+		echo "Installing $(1) via yum..."; \
+		sudo yum install -y $(1) || (echo "Installation failed. Try: sudo yum install $(1)" && exit 1); \
+	elif command -v zypper >/dev/null 2>&1; then \
+		echo "Installing $(1) via zypper..."; \
+		sudo zypper install -y $(1) || (echo "Installation failed. Try: sudo zypper install $(1)" && exit 1); \
+	else \
+		echo "Error: Could not detect package manager."; \
+		echo "Please install $(1) manually for your distribution."; \
+		exit 1; \
+	fi
+endef
 
 # Check and install RGBDS toolchain
 check-toolchain:
-	@MISSING_TOOLS=""; \
+	@echo "Checking for RGBDS toolchain..."; \
+	MISSING_TOOLS=""; \
 	if ! command -v $(AS) >/dev/null 2>&1; then \
 		MISSING_TOOLS="$$MISSING_TOOLS rgbasm"; \
 	fi; \
@@ -53,96 +77,283 @@ check-toolchain:
 	if ! command -v $(FIX) >/dev/null 2>&1; then \
 		MISSING_TOOLS="$$MISSING_TOOLS rgbfix"; \
 	fi; \
-	if [ -n "$$MISSING_TOOLS" ]; then \
+	if [ -z "$$MISSING_TOOLS" ]; then \
+		echo "✓ RGBDS already installed"; \
+	else \
 		echo "RGBDS toolchain missing. Missing tools:$$MISSING_TOOLS"; \
-		echo "Attempting to install RGBDS..."; \
+		PKG_INSTALLED=0; \
 		if command -v yay >/dev/null 2>&1; then \
-			echo "Detected yay (AUR helper). Installing rgbds from AUR..."; \
-			echo "Note: This requires sudo privileges."; \
-			yay -S --noconfirm rgbds || (echo "Installation failed. Try manually: yay -S rgbds" && exit 1); \
+			if yay -Qi rgbds >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "rgbds package is installed but tools not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
 		elif command -v paru >/dev/null 2>&1; then \
-			echo "Detected paru (AUR helper). Installing rgbds from AUR..."; \
-			echo "Note: This requires sudo privileges."; \
-			paru -S --noconfirm rgbds || (echo "Installation failed. Try manually: paru -S rgbds" && exit 1); \
+			if paru -Qi rgbds >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "rgbds package is installed but tools not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
 		elif command -v pacman >/dev/null 2>&1; then \
-			echo "Detected pacman (Arch Linux). Checking if rgbds is available..."; \
-			if pacman -Si rgbds >/dev/null 2>&1; then \
-				echo "Installing rgbds from official repositories..."; \
-				sudo pacman -S --noconfirm rgbds || (echo "Installation failed. Try manually: sudo pacman -S rgbds" && exit 1); \
-			else \
-				echo "rgbds not in official repos. Please install an AUR helper (yay/paru) or install manually:"; \
-				echo "  yay -S rgbds  # or paru -S rgbds"; \
+			if pacman -Qi rgbds >/dev/null 2>&1 2>/dev/null || pacman -Si rgbds >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "rgbds package is installed but tools not in PATH. Check your PATH."; \
 				exit 1; \
 			fi; \
 		elif command -v apt >/dev/null 2>&1 || command -v apt-get >/dev/null 2>&1; then \
-			echo "Detected apt (Debian/Ubuntu). Installing rgbds..."; \
-			sudo apt-get update && sudo apt-get install -y rgbds || (echo "Installation failed. rgbds may not be in repositories." && echo "Try: sudo apt-get install rgbds" && exit 1); \
+			if dpkg -l | grep -q "^ii.*rgbds "; then \
+				PKG_INSTALLED=1; \
+				echo "rgbds package is installed but tools not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
 		elif command -v dnf >/dev/null 2>&1; then \
-			echo "Detected dnf (Fedora). Installing rgbds..."; \
-			sudo dnf install -y rgbds || (echo "Installation failed. Try manually: sudo dnf install rgbds" && exit 1); \
+			if dnf list installed rgbds >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "rgbds package is installed but tools not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
 		elif command -v yum >/dev/null 2>&1; then \
-			echo "Detected yum (RHEL/CentOS). Installing rgbds..."; \
-			sudo yum install -y rgbds || (echo "Installation failed. Try manually: sudo yum install rgbds" && exit 1); \
+			if yum list installed rgbds >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "rgbds package is installed but tools not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
 		elif command -v zypper >/dev/null 2>&1; then \
-			echo "Detected zypper (openSUSE). Installing rgbds..."; \
-			sudo zypper install -y rgbds || (echo "Installation failed. Try manually: sudo zypper install rgbds" && exit 1); \
-		else \
-			echo "Error: Could not detect package manager."; \
-			echo "Please install rgbds manually:"; \
-			echo "  Arch Linux: sudo pacman -S rgbds  # or yay -S rgbds"; \
-			echo "  Debian/Ubuntu: sudo apt-get install rgbds"; \
-			echo "  Fedora: sudo dnf install rgbds"; \
-			exit 1; \
+			if zypper search -i rgbds >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "rgbds package is installed but tools not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
 		fi; \
-		if ! command -v $(AS) >/dev/null 2>&1 || ! command -v $(LD) >/dev/null 2>&1 || ! command -v $(FIX) >/dev/null 2>&1; then \
-			echo "Error: RGBDS installation completed but tools still not found."; \
-			echo "Please restart your terminal or check your PATH."; \
-			exit 1; \
+		if [ $$PKG_INSTALLED -eq 0 ]; then \
+			echo "rgbds package not installed. Installing..."; \
+			if command -v yay >/dev/null 2>&1; then \
+				echo "Using yay (AUR helper)..."; \
+				yay -S --noconfirm rgbds || (echo "Installation failed. Try: yay -S rgbds" && exit 1); \
+			elif command -v paru >/dev/null 2>&1; then \
+				echo "Using paru (AUR helper)..."; \
+				paru -S --noconfirm rgbds || (echo "Installation failed. Try: paru -S rgbds" && exit 1); \
+			elif command -v pacman >/dev/null 2>&1; then \
+				if pacman -Si rgbds >/dev/null 2>&1; then \
+					echo "Using pacman (official repos)..."; \
+					sudo pacman -S --noconfirm rgbds || (echo "Installation failed. Try: sudo pacman -S rgbds" && exit 1); \
+				else \
+					echo "rgbds not in official repos. Install AUR helper (yay/paru) or: yay -S rgbds"; \
+					exit 1; \
+				fi; \
+			elif command -v apt >/dev/null 2>&1 || command -v apt-get >/dev/null 2>&1; then \
+				echo "Using apt..."; \
+				sudo apt-get update && sudo apt-get install -y rgbds || (echo "Installation failed. Try: sudo apt-get install rgbds" && exit 1); \
+			elif command -v dnf >/dev/null 2>&1; then \
+				echo "Using dnf..."; \
+				sudo dnf install -y rgbds || (echo "Installation failed. Try: sudo dnf install rgbds" && exit 1); \
+			elif command -v yum >/dev/null 2>&1; then \
+				echo "Using yum..."; \
+				sudo yum install -y rgbds || (echo "Installation failed. Try: sudo yum install rgbds" && exit 1); \
+			elif command -v zypper >/dev/null 2>&1; then \
+				echo "Using zypper..."; \
+				sudo zypper install -y rgbds || (echo "Installation failed. Try: sudo zypper install rgbds" && exit 1); \
+			else \
+				echo "Error: Could not detect package manager."; \
+				echo "Please install rgbds manually for your distribution."; \
+				exit 1; \
+			fi; \
+			if ! command -v $(AS) >/dev/null 2>&1 || ! command -v $(LD) >/dev/null 2>&1 || ! command -v $(FIX) >/dev/null 2>&1; then \
+				echo "Error: RGBDS installation completed but tools still not found. Restart terminal or check PATH."; \
+				exit 1; \
+			fi; \
+			echo "✓ RGBDS installed successfully"; \
 		fi; \
-		echo "✓ RGBDS toolchain installed successfully"; \
 	fi
 
-# Check and install Python 3 (for verify target)
-check-python:
-	@if ! command -v python3 >/dev/null 2>&1; then \
-		echo "Python 3 not found. Attempting to install..."; \
-		if command -v yay >/dev/null 2>&1; then \
-			echo "Detected yay (AUR helper). Installing python from AUR..."; \
-			echo "Note: This requires sudo privileges."; \
-			yay -S --noconfirm python || (echo "Installation failed. Try manually: yay -S python" && exit 1); \
-		elif command -v paru >/dev/null 2>&1; then \
-			echo "Detected paru (AUR helper). Installing python from AUR..."; \
-			echo "Note: This requires sudo privileges."; \
-			paru -S --noconfirm python || (echo "Installation failed. Try manually: paru -S python" && exit 1); \
-		elif command -v pacman >/dev/null 2>&1; then \
-			echo "Detected pacman (Arch Linux). Installing python..."; \
-			sudo pacman -S --noconfirm python || (echo "Installation failed. Try manually: sudo pacman -S python" && exit 1); \
-		elif command -v apt >/dev/null 2>&1 || command -v apt-get >/dev/null 2>&1; then \
-			echo "Detected apt (Debian/Ubuntu). Installing python3..."; \
-			sudo apt-get update && sudo apt-get install -y python3 || (echo "Installation failed. Try manually: sudo apt-get install python3" && exit 1); \
-		elif command -v dnf >/dev/null 2>&1; then \
-			echo "Detected dnf (Fedora). Installing python3..."; \
-			sudo dnf install -y python3 || (echo "Installation failed. Try manually: sudo dnf install python3" && exit 1); \
-		elif command -v yum >/dev/null 2>&1; then \
-			echo "Detected yum (RHEL/CentOS). Installing python3..."; \
-			sudo yum install -y python3 || (echo "Installation failed. Try manually: sudo yum install python3" && exit 1); \
-		elif command -v zypper >/dev/null 2>&1; then \
-			echo "Detected zypper (openSUSE). Installing python3..."; \
-			sudo zypper install -y python3 || (echo "Installation failed. Try manually: sudo zypper install python3" && exit 1); \
+# Check and install emulator
+check-emu:
+	@echo "Checking for $(EMULATOR)..."; \
+	if command -v $(EMULATOR) >/dev/null 2>&1; then \
+		echo "✓ $(EMULATOR) already installed"; \
+	else \
+		echo "$(EMULATOR) not found in PATH."; \
+		EMU_NAME=$(EMULATOR); \
+		if [ "$$EMU_NAME" = "mgba" ]; then \
+			PKG_NAME="mgba-qt"; \
 		else \
-			echo "Error: Could not detect package manager."; \
-			echo "Please install Python 3 manually:"; \
-			echo "  Arch Linux: sudo pacman -S python"; \
-			echo "  Debian/Ubuntu: sudo apt-get install python3"; \
-			echo "  Fedora: sudo dnf install python3"; \
-			exit 1; \
+			PKG_NAME="$$EMU_NAME"; \
 		fi; \
-		if ! command -v python3 >/dev/null 2>&1; then \
-			echo "Error: Python 3 installation completed but command still not found."; \
-			echo "Please restart your terminal or check your PATH."; \
-			exit 1; \
+		PKG_INSTALLED=0; \
+		if command -v yay >/dev/null 2>&1; then \
+			if yay -Qi $$PKG_NAME >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "$$PKG_NAME package is installed but command not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
+		elif command -v paru >/dev/null 2>&1; then \
+			if paru -Qi $$PKG_NAME >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "$$PKG_NAME package is installed but command not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
+		elif command -v pacman >/dev/null 2>&1; then \
+			if pacman -Qi $$PKG_NAME >/dev/null 2>&1 2>/dev/null || pacman -Si $$PKG_NAME >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "$$PKG_NAME package is installed but command not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
+		elif command -v apt >/dev/null 2>&1 || command -v apt-get >/dev/null 2>&1; then \
+			if dpkg -l | grep -q "^ii.*$$PKG_NAME "; then \
+				PKG_INSTALLED=1; \
+				echo "$$PKG_NAME package is installed but command not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
+		elif command -v dnf >/dev/null 2>&1; then \
+			if dnf list installed $$PKG_NAME >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "$$PKG_NAME package is installed but command not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
+		elif command -v yum >/dev/null 2>&1; then \
+			if yum list installed $$PKG_NAME >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "$$PKG_NAME package is installed but command not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
+		elif command -v zypper >/dev/null 2>&1; then \
+			if zypper search -i $$PKG_NAME >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "$$PKG_NAME package is installed but command not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
 		fi; \
-		echo "✓ Python 3 installed successfully"; \
+		if [ $$PKG_INSTALLED -eq 0 ]; then \
+			echo "$$PKG_NAME package not installed. Installing..."; \
+			if command -v yay >/dev/null 2>&1; then \
+				echo "Using yay (AUR helper)..."; \
+				yay -S --noconfirm $$PKG_NAME || (echo "Installation failed. Try: yay -S $$PKG_NAME" && exit 1); \
+			elif command -v paru >/dev/null 2>&1; then \
+				echo "Using paru (AUR helper)..."; \
+				paru -S --noconfirm $$PKG_NAME || (echo "Installation failed. Try: paru -S $$PKG_NAME" && exit 1); \
+			elif command -v pacman >/dev/null 2>&1; then \
+				if pacman -Si $$PKG_NAME >/dev/null 2>&1; then \
+					echo "Using pacman (official repos)..."; \
+					sudo pacman -S --noconfirm $$PKG_NAME || (echo "Installation failed. Try: sudo pacman -S $$PKG_NAME" && exit 1); \
+				else \
+					echo "$$PKG_NAME not in official repos. Install AUR helper (yay/paru) or: yay -S $$PKG_NAME"; \
+					exit 1; \
+				fi; \
+			elif command -v apt >/dev/null 2>&1 || command -v apt-get >/dev/null 2>&1; then \
+				echo "Using apt..."; \
+				sudo apt-get update && sudo apt-get install -y $$PKG_NAME || (echo "Installation failed. Try: sudo apt-get install $$PKG_NAME" && exit 1); \
+			elif command -v dnf >/dev/null 2>&1; then \
+				echo "Using dnf..."; \
+				sudo dnf install -y $$PKG_NAME || (echo "Installation failed. Try: sudo dnf install $$PKG_NAME" && exit 1); \
+			elif command -v yum >/dev/null 2>&1; then \
+				echo "Using yum..."; \
+				sudo yum install -y $$PKG_NAME || (echo "Installation failed. Try: sudo yum install $$PKG_NAME" && exit 1); \
+			elif command -v zypper >/dev/null 2>&1; then \
+				echo "Using zypper..."; \
+				sudo zypper install -y $$PKG_NAME || (echo "Installation failed. Try: sudo zypper install $$PKG_NAME" && exit 1); \
+			else \
+				echo "Error: Could not detect package manager."; \
+				echo "Please install $$PKG_NAME manually for your distribution."; \
+				exit 1; \
+			fi; \
+			if ! command -v $(EMULATOR) >/dev/null 2>&1; then \
+				echo "Error: $(EMULATOR) installation completed but command not found. Restart terminal or check PATH."; \
+				exit 1; \
+			fi; \
+			echo "✓ $(EMULATOR) installed successfully"; \
+		fi; \
+	fi
+
+# Check and install Python 3
+check-python:
+	@echo "Checking for python3..."; \
+	if command -v python3 >/dev/null 2>&1; then \
+		echo "✓ python3 already installed"; \
+	else \
+		echo "python3 not found in PATH."; \
+		PKG_INSTALLED=0; \
+		if command -v yay >/dev/null 2>&1; then \
+			if yay -Qi python >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "python package is installed but python3 not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
+		elif command -v paru >/dev/null 2>&1; then \
+			if paru -Qi python >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "python package is installed but python3 not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
+		elif command -v pacman >/dev/null 2>&1; then \
+			if pacman -Qi python >/dev/null 2>&1 2>/dev/null || pacman -Si python >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "python package is installed but python3 not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
+		elif command -v apt >/dev/null 2>&1 || command -v apt-get >/dev/null 2>&1; then \
+			if dpkg -l | grep -q "^ii.*python3 "; then \
+				PKG_INSTALLED=1; \
+				echo "python3 package is installed but python3 not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
+		elif command -v dnf >/dev/null 2>&1; then \
+			if dnf list installed python3 >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "python3 package is installed but python3 not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
+		elif command -v yum >/dev/null 2>&1; then \
+			if yum list installed python3 >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "python3 package is installed but python3 not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
+		elif command -v zypper >/dev/null 2>&1; then \
+			if zypper search -i python3 >/dev/null 2>&1; then \
+				PKG_INSTALLED=1; \
+				echo "python3 package is installed but python3 not in PATH. Check your PATH."; \
+				exit 1; \
+			fi; \
+		fi; \
+		if [ $$PKG_INSTALLED -eq 0 ]; then \
+			echo "python3 package not installed. Installing..."; \
+			if command -v yay >/dev/null 2>&1; then \
+				echo "Using yay (AUR helper)..."; \
+				yay -S --noconfirm python || (echo "Installation failed. Try: yay -S python" && exit 1); \
+			elif command -v paru >/dev/null 2>&1; then \
+				echo "Using paru (AUR helper)..."; \
+				paru -S --noconfirm python || (echo "Installation failed. Try: paru -S python" && exit 1); \
+			elif command -v pacman >/dev/null 2>&1; then \
+				if pacman -Si python >/dev/null 2>&1; then \
+					echo "Using pacman (official repos)..."; \
+					sudo pacman -S --noconfirm python || (echo "Installation failed. Try: sudo pacman -S python" && exit 1); \
+				else \
+					echo "python not in official repos. Install AUR helper (yay/paru) or: yay -S python"; \
+					exit 1; \
+				fi; \
+			elif command -v apt >/dev/null 2>&1 || command -v apt-get >/dev/null 2>&1; then \
+				echo "Using apt..."; \
+				sudo apt-get update && sudo apt-get install -y python3 || (echo "Installation failed. Try: sudo apt-get install python3" && exit 1); \
+			elif command -v dnf >/dev/null 2>&1; then \
+				echo "Using dnf..."; \
+				sudo dnf install -y python3 || (echo "Installation failed. Try: sudo dnf install python3" && exit 1); \
+			elif command -v yum >/dev/null 2>&1; then \
+				echo "Using yum..."; \
+				sudo yum install -y python3 || (echo "Installation failed. Try: sudo yum install python3" && exit 1); \
+			elif command -v zypper >/dev/null 2>&1; then \
+				echo "Using zypper..."; \
+				sudo zypper install -y python3 || (echo "Installation failed. Try: sudo zypper install python3" && exit 1); \
+			else \
+				echo "Error: Could not detect package manager."; \
+				echo "Please install python3 manually for your distribution."; \
+				exit 1; \
+			fi; \
+			if ! command -v python3 >/dev/null 2>&1; then \
+				echo "Error: python3 installation completed but python3 not found. Restart terminal or check PATH."; \
+				exit 1; \
+			fi; \
+			echo "✓ python3 installed successfully"; \
+		fi; \
 	fi
 
 # ============================================================================
@@ -157,13 +368,13 @@ build/obj build/rom build/map:
 	@mkdir -p $@
 
 # Build object files from assembly source
-build/obj/%.o: src/%.asm | build/obj
+build/obj/%.o: src/%.asm | build/obj check-toolchain
 	@echo "Assembling $<..."
 	@mkdir -p $(dir $@)
 	$(AS) -i src $< -o $@
 
 # Link ROM from object files
-$(TARGET): $(OBJECTS) | build/rom
+$(TARGET): $(OBJECTS) | build/rom build/map
 	@echo "Linking $(TARGET)..."
 	$(LD) -o $(TARGET) $(OBJECTS) -m build/map/game.map
 	@echo "Fixing ROM header..."
@@ -196,99 +407,29 @@ distclean: clean
 # ============================================================================
 
 # Run ROM in selected emulator
-# Automatically detects and installs emulator if not found
-# Usage: make run EMULATOR=bgb
-run: $(TARGET)
-	@if [ "$(EMULATOR)" != "emulicious" ] && [ "$(EMULATOR)" != "bgb" ] && [ "$(EMULATOR)" != "sameboy" ] && [ "$(EMULATOR)" != "mgba" ]; then \
-		echo "Error: Invalid EMULATOR value '$(EMULATOR)'. Use 'emulicious', 'bgb', 'sameboy', or 'mgba'."; \
-		echo "Usage: make run EMULATOR=emulicious"; \
-		exit 1; \
-	fi
+# Auto-installs emulator if not found
+run: $(TARGET) check-emu
 	@echo "Running $(TARGET) in $(EMULATOR)..."
 	@EMU_NAME=$(EMULATOR); \
 	EMU_CMD=$$EMU_NAME; \
-	PKG_NAME=$$EMU_NAME; \
-	if [ "$$EMU_NAME" = "emulicious" ]; then \
-		PKG_NAME="emulicious"; \
-		EMU_CMD="emulicious"; \
-	elif [ "$$EMU_NAME" = "bgb" ]; then \
-		PKG_NAME="bgb"; \
-	elif [ "$$EMU_NAME" = "sameboy" ]; then \
-		PKG_NAME="sameboy"; \
-	elif [ "$$EMU_NAME" = "mgba" ]; then \
-		PKG_NAME="mgba-qt"; \
-	fi; \
-	if ! command -v $$EMU_CMD >/dev/null 2>&1; then \
-		echo "$$EMU_NAME not found. Attempting to install..."; \
-		if command -v yay >/dev/null 2>&1; then \
-			echo "Detected yay (AUR helper). Installing $$PKG_NAME from AUR..."; \
-			echo "Note: This requires sudo privileges."; \
-			yay -S --noconfirm $$PKG_NAME || (echo "Installation failed. Try manually: yay -S $$PKG_NAME" && exit 1); \
-		elif command -v paru >/dev/null 2>&1; then \
-			echo "Detected paru (AUR helper). Installing $$PKG_NAME from AUR..."; \
-			echo "Note: This requires sudo privileges."; \
-			paru -S --noconfirm $$PKG_NAME || (echo "Installation failed. Try manually: paru -S $$PKG_NAME" && exit 1); \
-		elif command -v pacman >/dev/null 2>&1; then \
-			echo "Detected pacman (Arch Linux). Checking if $$PKG_NAME is available..."; \
-			if pacman -Si $$PKG_NAME >/dev/null 2>&1; then \
-				echo "Installing $$PKG_NAME from official repositories..."; \
-				sudo pacman -S --noconfirm $$PKG_NAME || (echo "Installation failed. Try manually: sudo pacman -S $$PKG_NAME" && exit 1); \
-			else \
-				echo "$$PKG_NAME not in official repos. Please install an AUR helper (yay/paru) or install manually:"; \
-				echo "  yay -S $$PKG_NAME  # or paru -S $$PKG_NAME"; \
-				exit 1; \
-			fi; \
-		elif command -v apt >/dev/null 2>&1 || command -v apt-get >/dev/null 2>&1; then \
-			echo "Detected apt (Debian/Ubuntu). Installing $$PKG_NAME..."; \
-			sudo apt-get update && sudo apt-get install -y $$PKG_NAME || (echo "Installation failed. $$PKG_NAME may not be in repositories." && echo "Try: sudo apt-get install $$PKG_NAME" && exit 1); \
-		elif command -v dnf >/dev/null 2>&1; then \
-			echo "Detected dnf (Fedora). Installing $$PKG_NAME..."; \
-			sudo dnf install -y $$PKG_NAME || (echo "Installation failed. Try manually: sudo dnf install $$PKG_NAME" && exit 1); \
-		elif command -v yum >/dev/null 2>&1; then \
-			echo "Detected yum (RHEL/CentOS). Installing $$PKG_NAME..."; \
-			sudo yum install -y $$PKG_NAME || (echo "Installation failed. Try manually: sudo yum install $$PKG_NAME" && exit 1); \
-		elif command -v zypper >/dev/null 2>&1; then \
-			echo "Detected zypper (openSUSE). Installing $$PKG_NAME..."; \
-			sudo zypper install -y $$PKG_NAME || (echo "Installation failed. Try manually: sudo zypper install $$PKG_NAME" && exit 1); \
-		else \
-			echo "Error: Could not detect package manager."; \
-			echo "Please install $$PKG_NAME manually:"; \
-			echo "  Arch Linux: sudo pacman -S $$PKG_NAME  # or yay -S $$PKG_NAME"; \
-			echo "  Debian/Ubuntu: sudo apt-get install $$PKG_NAME"; \
-			echo "  Fedora: sudo dnf install $$PKG_NAME"; \
-			exit 1; \
-		fi; \
-		if ! command -v $$EMU_CMD >/dev/null 2>&1; then \
-			echo "Error: $$EMU_NAME installation completed but command still not found."; \
-			echo "Please restart your terminal or check your PATH."; \
-			exit 1; \
-		fi; \
-	fi; \
 	if [ "$$EMU_NAME" = "emulicious" ]; then \
 		export JAVA_TOOL_OPTIONS="--enable-native-access=ALL-UNNAMED"; \
 		export _JAVA_AWT_WM_NONREPARENTING=1; \
-		if [ -n "$$WAYLAND_DISPLAY" ] && [ -n "$$DISPLAY" ]; then \
-			echo "Wayland detected with XWayland - launching emulicious"; \
-			$$EMU_CMD "$(TARGET)"; \
-		elif [ -n "$$WAYLAND_DISPLAY" ]; then \
-			echo "Wayland detected - launching emulicious"; \
-			$$EMU_CMD "$(TARGET)"; \
-		elif [ -n "$$DISPLAY" ]; then \
-			echo "X11 detected - launching emulicious"; \
+		if [ -n "$$WAYLAND_DISPLAY" ] || [ -n "$$DISPLAY" ]; then \
 			$$EMU_CMD "$(TARGET)"; \
 		else \
-			echo "Error: No display server detected (X11 or Wayland)"; \
+			echo "Error: No display server detected"; \
 			exit 1; \
 		fi; \
 	elif [ -n "$$WAYLAND_DISPLAY" ] && [ -n "$$DISPLAY" ]; then \
-		echo "Wayland detected with XWayland - using XCB platform"; \
-		QT_QPA_PLATFORM=xcb $$EMU_CMD "$(TARGET)"; \
+		echo "Wayland+XWayland - using XCB platform"; \
+		QT_QPA_PLATFORM=xcb QT_LOGGING_RULES="qt.qpa.*=false" $$EMU_CMD "$(TARGET)" 2>&1 | grep -v "paintEngine\|qt.qpa" || true; \
 	elif [ -n "$$WAYLAND_DISPLAY" ]; then \
-		echo "Wayland detected - using Wayland platform"; \
-		QT_QPA_PLATFORM=wayland $$EMU_CMD "$(TARGET)"; \
+		echo "Wayland - using XCB platform (more compatible)"; \
+		QT_QPA_PLATFORM=xcb QT_LOGGING_RULES="qt.qpa.*=false" $$EMU_CMD "$(TARGET)" 2>&1 | grep -v "paintEngine\|qt.qpa" || true; \
 	elif [ -n "$$DISPLAY" ]; then \
-		echo "X11 detected - using XCB platform"; \
-		QT_QPA_PLATFORM=xcb $$EMU_CMD "$(TARGET)"; \
+		echo "X11 - using XCB platform"; \
+		QT_QPA_PLATFORM=xcb QT_LOGGING_RULES="qt.qpa.*=false" $$EMU_CMD "$(TARGET)" 2>&1 | grep -v "paintEngine\|qt.qpa" || true; \
 	else \
 		echo "Error: No display server detected (X11 or Wayland)"; \
 		exit 1; \
@@ -326,19 +467,11 @@ help:
 	@echo "  make clean              - Remove build artifacts"
 	@echo "  make distclean          - Deep clean"
 	@echo "  make run                - Run ROM with default emulator (emulicious)"
-	@echo "  make run EMULATOR=emulicious - Run ROM with emulicious (auto-installs if missing)"
-	@echo "  make run EMULATOR=bgb  - Run ROM with bgb (auto-installs if missing)"
-	@echo "  make run EMULATOR=sameboy - Run ROM with sameboy (auto-installs if missing)"
-	@echo "  make run EMULATOR=mgba  - Run ROM with mgba (auto-installs if missing)"
+	@echo "  make run EMULATOR=<name> - Run with specified emulator"
 	@echo "  make verify              - Verify ROM structure"
 	@echo "  make help               - Show this help"
 	@echo ""
-	@echo "Requirements:"
-	@echo "  - rgbasm (RGBDS assembler)"
-	@echo "  - rgblink (RGBDS linker)"
-	@echo "  - rgbfix (RGBDS ROM fixer)"
-	@echo "  - Game Boy emulator (emulicious, bgb, sameboy, mgba) - will be auto-installed if missing"
-	@echo ""
-	@echo "Emulator Selection:"
-	@echo "  Default: emulicious"
-	@echo "  Options: emulicious, bgb, sameboy, mgba"
+	@echo "Requirements (auto-installed if missing):"
+	@echo "  - RGBDS (rgbasm, rgblink, rgbfix)"
+	@echo "  - emulicious (Game Boy emulator, default) or bgb, sameboy, mgba"
+	@echo "  - python3 (for verify target)"

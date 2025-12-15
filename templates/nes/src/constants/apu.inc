@@ -4,6 +4,9 @@
 ; Per NES documentation: APU register addresses and constants
 ; ============================================================================
 
+.ifndef APU_CONSTANTS_INC
+APU_CONSTANTS_INC = 1
+
 ; APU registers
 APU_PULSE1_CTRL = $4000
 APU_PULSE1_SWEEP = $4001
@@ -39,3 +42,5 @@ APU_STATUS_NOISE_ACTIVE = %00001000
 APU_STATUS_TRIANGLE_ACTIVE = %00000100
 APU_STATUS_PULSE2_ACTIVE = %00000010
 APU_STATUS_PULSE1_ACTIVE = %00000001
+
+.endif ; APU_CONSTANTS_INC

@@ -1,8 +1,8 @@
 ; ============================================================================
 ; Controller Input Library
 ; ============================================================================
-; Per NES documentation: Controller reading via shift register
-; Follows established patterns from hello-world and welcome projects
+; SNES hardware behavior: Controller reading via shift register
+; Follows established patterns from hello-world example
 ; ============================================================================
 
 .include "constants/controller.inc"
@@ -11,7 +11,7 @@
 ; ============================================================================
 ; Read Controllers
 ; ============================================================================
-; Per NES documentation: Controller reading via shift register
+; SNES hardware behavior: Controller reading via shift register
 ; Reads both controllers and calculates pressed/released states
 ; ============================================================================
 read_controllers:
@@ -21,14 +21,14 @@ read_controllers:
     PHA
     
     ; Strobe controller 1
-    ; Per NES documentation: Set then clear strobe
+    ; SNES hardware behavior: Set then clear strobe
     LDA #$01
     STA CONTROLLER1     ; Set strobe
     LDA #$00
     STA CONTROLLER1     ; Clear strobe
     
     ; Read 8 buttons for controller 1
-    ; Per NES documentation: Read button state from bit 0
+    ; SNES hardware behavior: Read button state from bit 0
     LDX #0              ; Button index
 read_controller1_loop:
     LDA CONTROLLER1     ; Read button state

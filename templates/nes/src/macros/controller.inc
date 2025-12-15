@@ -14,10 +14,10 @@
 ; Checks if a button was pressed this frame
 ; Parameters: button (BUTTON_A, BUTTON_B, etc.), label (branch target if pressed)
 ; ============================================================================
-.macro check_button_pressed button, label
-    LDA #button
+.macro check_button_pressed_macro button_val, branch_label
+    LDA #button_val
     JSR check_button_pressed
-    BNE label
+    BNE branch_label
 .endmacro
 
 ; ============================================================================
@@ -26,10 +26,10 @@
 ; Checks if a button is currently held
 ; Parameters: button (BUTTON_A, BUTTON_B, etc.), label (branch target if held)
 ; ============================================================================
-.macro check_button_held button, label
-    LDA #button
+.macro check_button_held_macro button_val, branch_label
+    LDA #button_val
     JSR check_button_held
-    BNE label
+    BNE branch_label
 .endmacro
 
 ; ============================================================================
@@ -38,10 +38,10 @@
 ; Checks if a button was released this frame
 ; Parameters: button (BUTTON_A, BUTTON_B, etc.), label (branch target if released)
 ; ============================================================================
-.macro check_button_released button, label
-    LDA #button
+.macro check_button_released_macro button_val, branch_label
+    LDA #button_val
     JSR check_button_released
-    BNE label
+    BNE branch_label
 .endmacro
 
 ; ============================================================================

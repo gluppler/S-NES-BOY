@@ -1,8 +1,11 @@
 ; ============================================================================
 ; Mapper Constants
 ; ============================================================================
-; Per NES documentation: Mapper constants for iNES header
+; SNES hardware behavior: Mapper constants for iNES header
 ; ============================================================================
+
+.ifndef SNES_MAPPER_CONSTANTS_INC
+SNES_MAPPER_CONSTANTS_INC = 1
 
 ; Mapper IDs
 MAPPER_NROM = 0         ; NROM (Mapper 0) - No mapper
@@ -21,3 +24,5 @@ BATTERY_PRESENT = %00000010
 ; TV system
 TV_NTSC = 0
 TV_PAL = 1
+
+.endif ; SNES_MAPPER_CONSTANTS_INC

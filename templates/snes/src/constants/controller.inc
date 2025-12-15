@@ -1,8 +1,11 @@
 ; ============================================================================
 ; Controller Constants
 ; ============================================================================
-; Per NES documentation: Controller register addresses and constants
+; SNES hardware behavior: Controller register addresses and constants
 ; ============================================================================
+
+.ifndef SNES_CONTROLLER_CONSTANTS_INC
+SNES_CONTROLLER_CONSTANTS_INC = 1
 
 ; Controller registers
 CONTROLLER1 = $4016     ; Controller 1 shift register
@@ -23,3 +26,5 @@ controller1_buttons = $0300      ; Controller 1 button states (8 bytes)
 controller1_pressed = $0308     ; Controller 1 pressed this frame (8 bytes)
 controller1_released = $0310    ; Controller 1 released this frame (8 bytes)
 controller1_prev = $0318        ; Controller 1 previous frame state (8 bytes)
+
+.endif ; SNES_CONTROLLER_CONSTANTS_INC

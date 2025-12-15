@@ -7,6 +7,7 @@
 .include "memory/zeropage.inc"
 .include "constants/ppu.inc"
 .include "text/font_map.inc"
+.include "text/print.asm"
 
 ; ============================================================================
 ; Write Text at Position

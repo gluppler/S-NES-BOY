@@ -1,9 +1,9 @@
 # Changelog
 
-All notable changes to S-NES-BOY will be documented in this file.
+All notable changes to the S-NES-BOY Learning & Development Framework will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+and this framework adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
@@ -21,32 +21,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Applied Patterns & Systems (5.1-5.5)
 - Tooling & Debugging (6.1-6.3)
 - Real Hardware Considerations
-- Example projects (hello-world, welcome)
-- Template project for new NES development
-- Open source project structure (LICENSE, CONTRIBUTING, CODE_OF_CONDUCT)
+- Learning examples (hello-world)
+- Development template for new NES development
+- Open source framework structure (LICENSE, CONTRIBUTING, CODE_OF_CONDUCT)
 - GitHub issue and PR templates
 
 ### Changed
-- Renamed project from S-NES to S-NES-BOY to reflect all three systems
-- Restructured codebase to S-NES-BOY (multi-system focus: NES, SNES, Game Boy)
-- Updated all documentation to reflect S-NES-BOY branding
+- Renamed framework from S-NES to S-NES-BOY to reflect all three systems
+- Restructured as a Learning & Development Framework with integrated documentation, templates, and examples
+- Updated all documentation to reflect S-NES-BOY branding and framework nature
 - Cleaned up unused files and generated artifacts
 - Updated .gitignore to exclude generated files
 
 ### Removed
-- Unused Python generation scripts from welcome project
-- Generated output images from repository
+- Unused Python generation scripts
+- Generated output images from framework
 
 ## [1.0.0] - 2025-01-01
 
 ### Added
-- Complete S-NES-BOY codebase
-- Comprehensive documentation covering NES programming
+- Complete S-NES-BOY Learning & Development Framework
+- Comprehensive documentation covering NES, SNES, and Game Boy programming
 - Hardware-accurate explanations and examples
 - Cross-referenced sections
 - Dense reference cheatsheets
 - Example projects demonstrating best practices
-- Template for new project creation
+- Production-ready templates for new project creation
 
 ---
 

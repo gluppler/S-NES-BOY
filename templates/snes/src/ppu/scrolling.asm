@@ -1,7 +1,7 @@
 ; ============================================================================
 ; Scrolling
 ; ============================================================================
-; Per NES documentation: Scroll register management
+; SNES hardware behavior: Scroll register management
 ; ============================================================================
 
 .include "memory/zeropage.inc"

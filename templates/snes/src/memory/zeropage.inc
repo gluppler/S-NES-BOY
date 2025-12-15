@@ -1,11 +1,14 @@
 ; ============================================================================
 ; Zero Page Memory Definitions
 ; ============================================================================
-; Per NES documentation: Zero page ($0000-$00FF) for frequently accessed data
+; SNES hardware behavior: Zero page ($0000-$00FF) for frequently accessed data
 ; Zero page access is faster (3 cycles vs 4 cycles for absolute addressing)
 ; 
 ; Memory layout follows data-oriented design principles
 ; ============================================================================
+
+.ifndef SNES_ZEROPAGE_INC
+SNES_ZEROPAGE_INC = 1
 
 ; Temporary variables
 zp_temp = $00           ; Temporary variable
@@ -30,3 +33,5 @@ ppu_ctrl = $08          ; PPU control register value
 ;   player_y = $0A       ; Player Y position
 ;   score = $0B          ; Score (low byte)
 ;   score_high = $0C    ; Score (high byte)
+
+.endif ; SNES_ZEROPAGE_INC

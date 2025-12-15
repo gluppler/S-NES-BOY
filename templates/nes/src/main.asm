@@ -1,7 +1,7 @@
 ; ============================================================================
 ; NES Template - Main Entry Point
 ; ============================================================================
-; Full-featured NES project template with modular architecture
+; Full-featured NES development template with modular architecture
 ; Follows NES documentation best practices and hardware-accurate patterns
 ;
 ; This template applies to:
@@ -26,8 +26,8 @@
     .byte 0             ; NTSC
     .byte 0, 0, 0, 0, 0, 0  ; Unused
 
-; Include interrupt vectors
-.include "vectors.asm"
+; Interrupt vectors
+; Note: vectors.asm is compiled separately and linked
 
 .segment "CODE"
 
@@ -37,6 +37,10 @@
 .include "memory/zeropage.inc"
 .include "memory/ram.inc"
 .include "memory/oam.inc"
+
+; Import symbols from separately compiled modules
+.import update_game_state
+.import update_oam_buffer
 .include "memory/stack.inc"
 
 ; ============================================================================
@@ -63,27 +67,25 @@
 .include "macros/timing.inc"
 
 ; ============================================================================
-; Include Sprite System (needed by reset.asm)
+; Sprite System
 ; ============================================================================
+; Note: sprite_utils.asm and sprite_dma.asm are compiled separately and linked
 .include "sprites/sprite_dma.asm"
-.include "sprites/sprite_utils.asm"
 
 ; ============================================================================
-; Include State Management (needed by reset.asm)
+; State Management
 ; ============================================================================
-.include "state/state_machine.asm"
+; Note: state_machine.asm is compiled separately and linked
 
 ; ============================================================================
-; Include Palette System (needed by reset.asm)
+; Palette System
 ; ============================================================================
-.include "palette/palette_load.asm"
+; Note: palette_load.asm is compiled separately and linked
 
 ; ============================================================================
-; Include Core Modules
+; Core Modules
 ; ============================================================================
-.include "reset.asm"
-.include "nmi.asm"
-.include "irq.asm"
+; Note: nmi.asm and irq.asm are compiled separately and linked
 
 ; ============================================================================
 ; Include Input System
@@ -97,13 +99,11 @@
 .include "ppu/ppu_init.asm"
 .include "ppu/ppu_write.asm"
 .include "ppu/scrolling.asm"
-.include "ppu/attributes.asm"
 
 ; ============================================================================
-; Include Text System
+; Text System
 ; ============================================================================
-.include "text/print.asm"
-.include "text/print_centered.asm"
+; Note: print.asm and print_centered.asm are compiled separately and linked
 
 ; ============================================================================
 ; Include Tilemap System
@@ -122,10 +122,16 @@
 .include "screens/game.asm"
 
 ; ============================================================================
+; Include PPU Attributes (after ppu_write for set_ppu_address)
+; ============================================================================
+.include "ppu/attributes.asm"
+
+; ============================================================================
 ; Main Loop
 ; ============================================================================
 ; Per NES documentation: Game loop pattern with frame synchronization
 ; ============================================================================
+.export main_loop
 main_loop:
     ; Wait for frame
     ; Per NES documentation: Frame synchronization
@@ -184,9 +190,15 @@ update_rendering:
 ; ============================================================================
 
 ; ============================================================================
+; Reset Handler
+; ============================================================================
+; Note: reset.asm is compiled separately and linked
+; It imports main_loop, init_sprites, init_game_state, load_palette from this file
+
+; ============================================================================
 ; CHR ROM Data
 ; ============================================================================
 ; Per NES documentation: Pattern table data, 8 KB (512 tiles × 16 bytes)
 ; ============================================================================
 .segment "CHARS"
-    .incbin "graphics/chr/font.chr"
+    .incbin "../assets/graphics/chr/font.chr"

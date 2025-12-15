@@ -1,6 +1,6 @@
 # Contributing to S-NES-BOY
 
-Thank you for your interest in contributing! This document provides guidelines and instructions for contributing to S-NES-BOY, a codebase dedicated to learning and development of NES (Nintendo Entertainment System), SNES (Super Nintendo Entertainment System), and Game Boy systems and programming.
+Thank you for your interest in contributing! This document provides guidelines and instructions for contributing to S-NES-BOY, a **Learning & Development Framework** dedicated to learning and development of NES (Nintendo Entertainment System), SNES (Super Nintendo Entertainment System), and Game Boy systems and programming.
 
 ## Code of Conduct
 
@@ -28,21 +28,21 @@ We welcome suggestions for improvements:
 2. Create a new issue with:
    - A clear description of the enhancement
    - Why it would be useful
-   - How it fits with the project's goals
+   - How it fits with the framework's goals
    - Examples or mockups if applicable
 
 ### Contributing Content
 
 #### Documentation Updates
 
-1. **Fork the repository**
+1. **Fork the framework repository**
 2. **Create a branch** for your changes:
    ```bash
    git checkout -b fix/description-of-fix
    # or
    git checkout -b feature/description-of-feature
    ```
-3. **Make your changes** following the project's style guidelines
+3. **Make your changes** following the framework's style guidelines
 4. **Test your changes** by reviewing the markdown rendering
 5. **Commit your changes** with clear, descriptive commit messages
 6. **Push to your fork** and create a Pull Request
@@ -70,8 +70,8 @@ Each documentation file should include:
 
 1. **Update documentation** if your PR changes functionality
 2. **Add yourself** to CONTRIBUTORS.md if this is your first contribution
-3. **Ensure your PR:
-   - Follows the project's style guidelines
+3. **Ensure your PR:**
+   - Follows the framework's style guidelines
    - Includes appropriate cross-references
    - Maintains hardware accuracy
    - Has clear commit messages
@@ -80,32 +80,32 @@ Each documentation file should include:
 
 ### Development Setup
 
-1. Clone the repository:
+1. Clone the framework repository:
    ```bash
    git clone https://github.com/yourusername/s-nes-boy.git
    cd s-nes-boy
    ```
 
-2. Review the documentation structure in `nes-docs/` and `snes-docs/`
+2. Review the documentation structure in `docs/nes/`, `docs/snes/`, and `docs/gameboy/`
 
 3. Make your changes following the guidelines above
 
 ### Areas for Contribution
 
-- **Documentation improvements: Clarifications, corrections, additional examples
-- **New sections: Expanding coverage of NES, SNES, and programming topics
-- **SNES content: Adding SNES-specific documentation and examples
-- ** content: Documenting -specific features
-- **Code examples: Better or more comprehensive examples
-- **Cheatsheets: Additional reference tables or quick guides
-- **Tooling: Improvements to development workflow documentation
-- **Real hardware: Additional real hardware considerations for all systems
+- **Documentation improvements**: Clarifications, corrections, additional examples, expanded learning paths
+- **New sections**: Expanding coverage of NES, SNES, and Game Boy programming topics
+- **Learning examples**: Additional working examples demonstrating specific concepts or techniques
+- **Template enhancements**: Improvements to development templates for better usability
+- **Code examples**: Better or more comprehensive examples in documentation
+- **Cheatsheets**: Additional reference tables or quick guides
+- **Tooling**: Improvements to development workflow documentation and tools
+- **Real hardware**: Additional real hardware considerations and testing for all systems
 
 ### Questions?
 
 If you have questions about contributing, please:
 - Open an issue with the `question` label
 - Check existing issues and discussions
-- Review the documentation in `nes-docs/README.md` and `snes-docs/README.md`
+- Review the documentation in `docs/nes/README.md`, `docs/snes/README.md`, and `docs/gameboy/README.md`
 
 Thank you for contributing to S-NES-BOY!

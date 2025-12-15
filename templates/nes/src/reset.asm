@@ -11,6 +11,14 @@
 .include "constants/cpu.inc"
 .include "constants/ppu.inc"
 
+; Import symbols from other modules
+.import main_loop
+.import init_sprites
+.import init_game_state
+.import load_palette
+
+; Export reset entry point
+.export reset
 reset:
     ; Disable interrupts and initialize CPU
     SEI                 ; Disable interrupts (per NES documentation: required first)

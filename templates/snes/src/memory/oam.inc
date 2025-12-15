@@ -1,8 +1,11 @@
 ; ============================================================================
 ; OAM (Object Attribute Memory) Definitions
 ; ============================================================================
-; Per NES documentation: OAM buffer format
+; SNES hardware behavior: OAM buffer format
 ; ============================================================================
+
+.ifndef SNES_OAM_INC
+SNES_OAM_INC = 1
 
 OAM_BUFFER = $0200      ; OAM buffer (256 bytes, 64 sprites)
 SPRITE_SIZE = 4         ; 4 bytes per sprite (Y, Tile, Attributes, X)
@@ -23,3 +26,5 @@ sprite_y = $0440        ; Sprite Y positions (64 bytes, one per sprite)
 sprite_tile = $0480     ; Sprite tile indices (64 bytes, one per sprite)
 sprite_attr = $04C0     ; Sprite attributes (64 bytes, one per sprite)
 sprite_active = $0500   ; Sprite active flags (64 bytes, 0=inactive, 1=active)
+
+.endif ; SNES_OAM_INC

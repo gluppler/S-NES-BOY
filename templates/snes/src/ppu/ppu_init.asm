@@ -1,7 +1,7 @@
 ; ============================================================================
 ; PPU Initialization
 ; ============================================================================
-; Per NES documentation: PPU initialization
+; SNES hardware behavior: PPU initialization
 ; ============================================================================
 
 .include "constants/ppu.inc"

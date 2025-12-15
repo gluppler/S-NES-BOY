@@ -1,7 +1,7 @@
 ; ============================================================================
 ; PPU Write Utilities
 ; ============================================================================
-; Per NES documentation: PPU write utilities
+; SNES hardware behavior: PPU write utilities
 ; ============================================================================
 
 .include "constants/ppu.inc"

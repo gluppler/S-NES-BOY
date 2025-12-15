@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report an error or inaccuracy in the documentation
+about: Report an error or inaccuracy in the framework documentation
 title: '[BUG] '
 labels: bug
 assignees: ''
@@ -11,7 +11,7 @@ A clear and concise description of what the bug is.
 
 ## Location
 - **Section: [e.g., 2.1 CPU Timing & Cycles]
-- **File: [e.g., nes-docs/02-advanced-fundamentals/2.1-cpu-timing-cycles.md or snes-docs/02-advanced-fundamentals/2.1-cpu-timing-cycles.md]
+- **File: [e.g., docs/nes/advanced_fundamentals/2.1-cpu-timing-cycles.md or docs/snes/advanced_fundamentals/2.1-cpu-timing-cycles.md]
 - **Specific content: [Quote or describe the problematic content]
 
 ## Expected Behavior

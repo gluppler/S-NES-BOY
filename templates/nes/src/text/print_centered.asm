@@ -8,6 +8,9 @@
 .include "constants/ppu.inc"
 .include "text/font_map.inc"
 
+; Import write_text (defined in print.asm, compiled separately)
+.import write_text
+
 ; ============================================================================
 ; Write Text at Position
 ; ============================================================================

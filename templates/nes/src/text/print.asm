@@ -13,6 +13,7 @@ text_ptr = $02          ; 16-bit pointer for text data
 ; ============================================================================
 ; Write Text String
 ; ============================================================================
+.export write_text
 write_text:
     LDY #0
 write_text_loop:

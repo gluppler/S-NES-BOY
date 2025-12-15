@@ -11,6 +11,7 @@
 ; ============================================================================
 ; Initialize Game State
 ; ============================================================================
+.export init_game_state, update_game_state
 init_game_state:
     LDA #STATE_TITLE
     STA game_state

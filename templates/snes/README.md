@@ -87,6 +87,7 @@ The snes-hello patterns are integrated into the example at `examples/snes/hello_
 
 - [Framework Overview](../../README.md) – Main framework README
 - [SNES Documentation Index](../../docs/snes/README.md) – SNES documentation index
+- [SNES Test ROMs](../../tests/snes/) – SNES test ROMs (when available)
 - [SNES Fundamentals](../../docs/snes/fundamentals/) – Core SNES hardware concepts
 - [SNES Advanced Fundamentals](../../docs/snes/advanced_fundamentals/) – Timing and constraints
 - [SNES Core Concepts](../../docs/snes/concepts/) – System interaction patterns

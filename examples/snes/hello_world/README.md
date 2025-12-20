@@ -48,4 +48,5 @@ The code patterns from snes-hello have been integrated into the S-NES-BOY templa
 - [SNES Fundamentals](../../../docs/snes/fundamentals/) – Core SNES hardware concepts
 - [SNES Gold Standard Examples](../../../docs/snes/gold_standard/) – Reference implementations
 - [SNES Template](../../../templates/snes/) – Complete SNES template with full structure
+- [SNES Test ROMs](../../../tests/snes/) – SNES test ROMs (when available)
 - [Framework Overview](../../../README.md) – Main framework README

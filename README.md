@@ -22,6 +22,16 @@ Comprehensive hardware-accurate documentation lives under `docs/`:
 
 Each system documentation tree is written in hardware terms, is self-contained, and provides a complete learning path from basics to advanced development.
 
+## Hardware Schematics
+
+Hardware schematic diagrams for console and cartridge circuits:
+
+- `schematics/nes/` - NES console and cartridge schematic diagrams (KiCad and PDF)
+- `schematics/snes/` - SNES schematics (directory structure ready)
+- `schematics/gb/` - Game Boy schematics (directory structure ready)
+
+These schematics provide circuit-level documentation essential for understanding hardware behavior, developing accurate emulators, and creating hardware projects.
+
 ## Development Templates
 
 Production-ready development templates live under `templates/`:
@@ -40,7 +50,8 @@ Working example projects live under `examples/`:
 
 - `examples/nes/hello_world` - NES text rendering example demonstrating hardware initialization and PPU usage
 - `examples/nes/vdelay_example` - Variable delay routine demonstrating cycle-accurate timing (29-65535 cycles)
-- `examples/nes/prng_example` - Random number generator example demonstrating 16-bit LFSR PRNG (galois16)
+- `examples/nes/prng_6502_example` - Complete PRNG example demonstrating all three PRNG widths (16, 24, and 32-bit) with separate seed storage
+- `examples/nes/hex_string_example` - Hex string macro example demonstrating multibyte constant definition
 - `examples/nes/nrom_example` - Complete NROM template with sprite system, DMC-safe controller reading, and game loop
 - `examples/nes/snrom_example` - Complete SNROM/MMC1 template with bank switching and inter-bank function calls
 
@@ -53,6 +64,22 @@ Working example projects live under `examples/`:
 - `examples/gameboy/hello_world` - Game Boy text rendering example demonstrating LCD initialization and tile rendering
 
 These examples serve as learning resources, demonstrating correct hardware initialization, text rendering, timing patterns, and basic program structure for each system.
+
+## Test ROMs
+
+Comprehensive test ROM collections for verifying hardware behavior, emulator accuracy, and code correctness live under `tests/`:
+
+- `tests/nes/` - NES test ROMs: CPU tests, PPU tests, APU tests, mapper tests, timing tests, and specialized tests
+- `tests/snes/` - SNES test ROMs (directory structure ready)
+- `tests/gb/` - Game Boy test ROMs (directory structure ready)
+
+These test ROMs are authoritative tools for:
+- Hardware behavior verification
+- Emulator accuracy testing
+- Code correctness validation
+- Timing edge case discovery
+
+See [`tests/nes/README.md`](tests/nes/README.md) for detailed information about NES test ROMs.
 
 ## Quick Start
 
@@ -104,10 +131,11 @@ Key top-level files:
 
 ## Framework Components
 
-This framework consists of three integrated components:
+This framework consists of four integrated components:
 
 1. **Comprehensive Documentation** - Complete learning paths for each system
 2. **Development Templates** - Production-ready starting points for new projects
 3. **Working Examples** - Reference implementations demonstrating correct patterns
+4. **Test ROMs** - Authoritative test suites for hardware verification and emulator validation
 
 For contribution details, see [`CONTRIBUTING.md`](CONTRIBUTING.md). For external references, see the per-system `docs/<system>/REFERENCES.md` files.

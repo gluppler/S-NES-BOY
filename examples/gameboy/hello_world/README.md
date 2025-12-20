@@ -47,6 +47,7 @@ Emulators will be automatically installed if missing (requires package manager).
 - [Game Boy Advanced Fundamentals](../../../docs/gameboy/advanced_fundamentals/) – Timing and constraints
 - [Game Boy References](../../../docs/gameboy/references/REFERENCES.md) – External resources and authoritative links
 - [Game Boy Template](../../../templates/gb/) – Complete Game Boy template with full structure
+- [Game Boy Test ROMs](../../../tests/gb/) – Game Boy test ROMs (when available)
 - [Framework Overview](../../../README.md) – Main framework README
 
 ## External References

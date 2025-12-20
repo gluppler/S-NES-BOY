@@ -193,8 +193,23 @@ clear_ram:
 * Clean console cartridge slot
 * Use contact cleaner if needed
 
+## Hardware Schematics
+
+For detailed circuit diagrams of the NES console and cartridges, see [`schematics/nes/`](../../../../schematics/nes/README.md). These schematics show:
+- Console circuit architecture (CPU, PPU, memory mapping)
+- Cartridge circuit designs (NROM, CNROM, UNROM, SNROM, TLROM, etc.)
+- Mapper chip implementations
+- Pin connections and signal routing
+
+Understanding the hardware schematics helps with:
+- Debugging hardware-specific issues
+- Understanding power-on state behavior
+- Verifying emulator accuracy
+- Developing hardware projects
+
 ## Cross-References
 
-- Related Fundamentals: 1.1 (NES System Overview)
+- Related Fundamentals: 1.1 (NES System Overview), 1.5 (ROM Fundamentals)
 - Related Advanced Fundamentals: 2.1 (CPU Timing), 2.2 (NMI & VBlank), 2.3 (PPU Rendering Rules)
 - Related Tooling: 6.2 (Emulators & Debuggers)
+- Hardware Schematics: [`schematics/nes/`](../../../../schematics/nes/README.md) - Console and cartridge circuit diagrams

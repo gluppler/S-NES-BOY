@@ -1,6 +1,6 @@
 # NES Examples
 
-Working example projects demonstrating NES development with the S-NES-BOY framework.
+Working example projects demonstrating NES development with the S-NES-BOY framework. Each example is a complete, buildable NES ROM that demonstrates specific hardware features, programming techniques, or development patterns.
 
 ## Examples
 
@@ -42,27 +42,6 @@ make
 **Source**: Based on [6502vdelay](https://github.com/bbbradsmith/6502vdelay)
 
 **Files**: `src/vdelay.asm`, `src/main.asm` (all `.asm` files)
-
-### prng_example
-
-Random number generator example demonstrating:
-- 16-bit LFSR PRNG (galois16)
-- Simple and overlapped implementations
-- Visual random number display
-- PRNG usage patterns
-- Proper PPU initialization and CHR data handling
-
-**Location**: [`examples/nes/prng_example/`](prng_example/)
-
-**Build**:
-```bash
-cd examples/nes/prng_example
-make
-```
-
-**Source**: Based on [prng_6502](https://github.com/bbbradsmith/prng_6502)
-
-**Files**: `src/common.asm`, `src/galois16.asm`, `src/main.asm` (all `.asm` files)
 
 ### nrom_example
 
@@ -106,6 +85,46 @@ make
 
 **Files**: All source files in `src/` use `.asm` extension
 
+### hex_string_example
+
+Hex string macro example demonstrating:
+- Multibyte constant definition using hex strings
+- Readable hex string formatting with underscores
+- Hex macro usage for lookup tables and constants
+- Alternative to verbose `.byte` directives
+
+**Location**: [`examples/nes/hex_string_example/`](hex_string_example/)
+
+**Build**:
+```bash
+cd examples/nes/hex_string_example
+make
+```
+
+**Files**: `src/main.asm`, `src/macros/hex_string.inc` (all `.asm` files)
+
+### prng_6502_example
+
+Complete PRNG example demonstrating all three PRNG widths:
+- 16-bit LFSR PRNG (galois16)
+- 24-bit LFSR PRNG (galois24)
+- 32-bit LFSR PRNG (galois32)
+- Simple and overlapped implementations for each width
+- Visual random number display for all three PRNGs
+- Separate seed storage to avoid interference
+
+**Location**: [`examples/nes/prng_6502_example/`](prng_6502_example/)
+
+**Build**:
+```bash
+cd examples/nes/prng_6502_example
+make
+```
+
+**Source**: Based on [prng_6502](https://github.com/bbbradsmith/prng_6502)
+
+**Files**: `src/common.asm`, `src/galois16.asm`, `src/galois24.asm`, `src/galois32.asm`, `src/main.asm` (all `.asm` files)
+
 ## Usage
 
 Each example includes:
@@ -140,3 +159,4 @@ All NES examples use:
 - [NES Documentation](../../docs/nes/README.md) - Complete NES learning path
 - [NES Fundamentals](../../docs/nes/fundamentals/) - Core hardware concepts
 - [NES Advanced Fundamentals](../../docs/nes/advanced_fundamentals/) - Timing and optimization
+- [NES Test ROMs](../../tests/nes/README.md) - Test ROM collection for hardware verification

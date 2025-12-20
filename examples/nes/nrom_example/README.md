@@ -46,3 +46,4 @@ make run
 - [NROM Template Documentation](https://github.com/pinobatch/nrom-template) - Original template repository
 - [NES Fundamentals](../../../docs/nes/fundamentals/) - Core NES hardware concepts
 - [NES Documentation](../../../docs/nes/README.md) - Complete NES learning path
+- [NROM Hardware Schematic](../../../schematics/nes/README.md#nrom-mapper-0) - NROM cartridge circuit diagram

@@ -23,13 +23,20 @@ and this framework adheres to [Semantic Versioning](https://semver.org/spec/v2.0
 - Real Hardware Considerations
 - Learning examples (hello-world)
 - Development template for new NES development
+- Test ROMs directory structure (`tests/nes/`, `tests/snes/`, `tests/gb/`)
+- Comprehensive NES test ROM collection (65 test directories, 467 test files)
+- NES test ROMs documentation and catalog
 - Open source framework structure (LICENSE, CONTRIBUTING, CODE_OF_CONDUCT)
 - GitHub issue and PR templates
 
 ### Changed
 - Renamed framework from S-NES to S-NES-BOY to reflect all three systems
-- Restructured as a Learning & Development Framework with integrated documentation, templates, and examples
+- Restructured as a Learning & Development Framework with integrated documentation, templates, examples, and test ROMs
 - Updated all documentation to reflect S-NES-BOY branding and framework nature
+- Updated all README files to include references to test ROMs directory
+- Updated documentation cross-references to include test ROMs
+- Converted all NES test ROM source files from `.s` to `.asm` extension
+- Updated all test ROM include directives to reference `.asm` files
 - Cleaned up unused files and generated artifacts
 - Updated .gitignore to exclude generated files
 

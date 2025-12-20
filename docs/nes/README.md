@@ -72,13 +72,19 @@ Tools and techniques for development.
 
 - [6.1 Toolchain (Linux-first)](06-tooling-debugging/6.1-toolchain.md) - ca65/ld65, asm6f, Makefiles
 - [6.2 Emulators & Debuggers](06-tooling-debugging/6.2-emulators-debuggers.md) - Mesen2 workflow, breakpoints, PPU viewers
-- [6.3 Test ROMs](06-tooling-debugging/6.3-test-roms.md) - CPU tests, PPU tests, APU tests
+- [6.3 Test ROMs](06-tooling-debugging/6.3-test-roms.md) - CPU tests, PPU tests, APU tests (see [`tests/nes/`](../../../tests/nes/) for test ROM collection)
 
 ### 7. Real Hardware Considerations
 
 What you need to know for real NES hardware.
 
 - [Real Hardware Considerations](07-real-hardware/real-hardware-considerations.md) - Flashcarts, power-on state, emulator mismatches
+
+### 8. Hardware Schematics
+
+Circuit-level hardware documentation.
+
+- [Hardware Schematics](../../../schematics/nes/README.md) - Console and cartridge schematic diagrams
 
 ## Philosophy
 
@@ -112,6 +118,8 @@ This knowledge base follows these principles:
 
 - [Main README](../../README.md) - Framework overview
 - [References](REFERENCES.md) - Authoritative NES development resources and source URLs
+- [Hardware Schematics](../../schematics/nes/README.md) - Console and cartridge circuit diagrams
+- [Test ROMs](../../tests/nes/README.md) - Comprehensive test ROM collection
 - [Contributing Guide](../../CONTRIBUTING.md) - How to contribute to this framework
 
 ## External Resources

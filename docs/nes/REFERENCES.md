@@ -66,6 +66,7 @@ Authoritative documentation and resources for NES hardware and programming.
 - [PPU Rendering](https://www.nesdev.org/wiki/PPU_rendering) - Rendering pipeline documentation
 - [PPU Power-Up State](https://www.nesdev.org/wiki/PPU_power_up_state) - PPU register state at power-on
 - [PPU Pinout](https://www.nesdev.org/wiki/PPU_pinout) - Hardware pin connections
+- [S-NES-BOY Hardware Schematics](../../../schematics/nes/README.md) - Complete NES console and cartridge schematic diagrams
 - [PPU Variants](https://www.nesdev.org/wiki/PPU_variants) - 2C02 (NTSC) vs 2C07 (PAL) differences
 
 ### PPU Memory Structures
@@ -103,6 +104,7 @@ Authoritative documentation and resources for NES hardware and programming.
 - [Standard Controller](https://www.nesdev.org/wiki/Standard_controller) - NES controller hardware
 - [Controller Detection](https://www.nesdev.org/wiki/Controller_detection) - Detecting connected controllers
 - [Controller Port Pinout](https://www.nesdev.org/wiki/Controller_port_pinout) - Hardware pin connections
+- [S-NES-BOY Hardware Schematics](../../../schematics/nes/README.md) - NES console and cartridge circuit diagrams
 - [Expansion Port](https://www.nesdev.org/wiki/Expansion_port) - NES expansion port
 - [Input Devices](https://www.nesdev.org/wiki/Input_devices) - All NES input devices
 - [Detect TV System](https://www.nesdev.org/wiki/Detect_TV_system) - Detecting NTSC vs PAL
@@ -135,6 +137,7 @@ Authoritative documentation and resources for NES hardware and programming.
 - [Tricky-to-Emulate Games](https://www.nesdev.org/wiki/Tricky-to-emulate_games) - Games that test emulator accuracy
 - [Emulator Tests](https://www.nesdev.org/wiki/Emulator_tests) - Test ROMs for emulator validation
 - [Emulator Tests Forum Discussion 1](https://forums.nesdev.org/viewtopic.php?t=599) - Test ROM discussion
+- [S-NES-BOY Test ROMs](../../../tests/nes/README.md) - Comprehensive NES test ROM collection in this framework
 - [Emulator Tests Forum Discussion 2](https://forums.nesdev.org/viewtopic.php?t=505) - Testing methodology
 - [Emulator Tests Forum Discussion 3](https://forums.nesdev.org/viewtopic.php?t=711) - Accuracy testing
 - [Emulator Tests Forum Discussion 4](https://forums.nesdev.org/viewtopic.php?t=511) - Test suite discussion
@@ -147,6 +150,7 @@ Authoritative documentation and resources for NES hardware and programming.
 
 - [Programming Mappers](https://www.nesdev.org/wiki/Programming_mappers) - General mapper programming guide
 - [Programming NROM](https://www.nesdev.org/wiki/Programming_NROM) - Mapper 0 (NROM) programming
+- [S-NES-BOY Cartridge Schematics](../../../schematics/nes/README.md#cartridge-schematics) - Hardware circuit diagrams for NROM, CNROM, UNROM, SNROM, TLROM, TSROM, and other mappers
 - [Programming UNROM](https://www.nesdev.org/wiki/Programming_UNROM) - Mapper 2 (UNROM) programming
 - [UxROM](https://www.nesdev.org/wiki/UxROM) - UxROM mapper details
 - [CHR ROM vs CHR RAM](https://www.nesdev.org/wiki/CHR_ROM_vs._CHR_RAM#Switching_to_CHR_RAM) - CHR memory switching
@@ -303,5 +307,9 @@ Authoritative documentation and resources for NES hardware and programming.
 - **Emulation & Testing**: 13 URLs (accuracy, test ROMs)
 - **Utilities**: 4 URLs (CRC32, algorithms)
 - **Case Studies**: 1 URL (game deep dives)
+
+**S-NES-BOY Framework Resources:**
+- [Hardware Schematics](../../../schematics/nes/README.md) - Complete NES console and cartridge circuit diagrams
+- [Test ROMs](../../../tests/nes/README.md) - Comprehensive NES test ROM collection
 
 All URLs are verified and organized according to NES hardware documentation best practices.

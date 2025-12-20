@@ -81,7 +81,7 @@ Tools and techniques for development.
 
 - [6.1 Toolchain (Linux-first)](06-tooling-debugging/6.1-toolchain.md) - ca65/ld65, Makefiles
 - [6.2 Emulators & Debuggers](06-tooling-debugging/6.2-emulators-debuggers.md) - bsnes workflow, breakpoints, PPU viewers
-- [6.3 Test ROMs](06-tooling-debugging/6.3-test-roms.md) - CPU tests, PPU tests, SPC700 tests
+- [6.3 Test ROMs](06-tooling-debugging/6.3-test-roms.md) - CPU tests, PPU tests, SPC700 tests (see [`tests/snes/`](../../../tests/snes/) for test ROM collection when available) (see `tests/snes/` for test ROM collection when available)
 
 ### 7. Real Hardware Considerations
 

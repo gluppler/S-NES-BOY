@@ -41,3 +41,4 @@ make run
 - [SNROM Template Documentation](https://github.com/pinobatch/snrom-template) - Original template repository
 - [MMC1 Mapper Documentation](../../../docs/nes/fundamentals/1.5-rom-fundamentals.md) - Mapper fundamentals
 - [NES Documentation](../../../docs/nes/README.md) - Complete NES learning path
+- [SNROM Hardware Schematic](../../../schematics/nes/README.md#snrom-mapper-1---mmc1) - SNROM/MMC1 cartridge circuit diagram

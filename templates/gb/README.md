@@ -69,6 +69,7 @@ Follow the existing code structure and maintain hardware-accurate timing constra
 
 - [Framework Overview](../../README.md) – Main framework README
 - [Game Boy Documentation Index](../../docs/gameboy/README.md) – Game Boy documentation index
+- [Game Boy Test ROMs](../../tests/gb/) – Game Boy test ROMs (when available)
 - [Game Boy Fundamentals](../../docs/gameboy/fundamentals/) – Core Game Boy hardware concepts
 - [Game Boy Advanced Fundamentals](../../docs/gameboy/advanced_fundamentals/) – Timing and constraints
 - [Game Boy Core Concepts](../../docs/gameboy/concepts/) – System interaction patterns

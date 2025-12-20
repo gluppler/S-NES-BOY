@@ -112,6 +112,8 @@ Follow the existing code structure and maintain hardware-accurate timing constra
 - [NES Fundamentals](../../docs/nes/fundamentals/) - Core NES hardware concepts
 - [NES Advanced Fundamentals](../../docs/nes/advanced_fundamentals/) - Timing and constraints
 - [NES Core Concepts](../../docs/nes/concepts/) - System interaction patterns
+- [NES Test ROMs](../../tests/nes/README.md) - Test ROM collection for hardware verification
+- [NES Hardware Schematics](../../schematics/nes/README.md) - Console and cartridge circuit diagrams
 
 ## Philosophy
 

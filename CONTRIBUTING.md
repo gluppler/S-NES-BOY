@@ -87,6 +87,7 @@ Each documentation file should include:
    ```
 
 2. Review the documentation structure in `docs/nes/`, `docs/snes/`, and `docs/gameboy/`
+3. Review test ROMs in `tests/nes/`, `tests/snes/`, and `tests/gb/` (when available)
 
 3. Make your changes following the guidelines above
 
@@ -98,6 +99,7 @@ Each documentation file should include:
 - **Template enhancements**: Improvements to development templates for better usability
 - **Code examples**: Better or more comprehensive examples in documentation
 - **Cheatsheets**: Additional reference tables or quick guides
+- **Test ROMs**: Contributing test ROMs or improving test ROM documentation
 - **Tooling**: Improvements to development workflow documentation and tools
 - **Real hardware**: Additional real hardware considerations and testing for all systems
 
@@ -107,5 +109,6 @@ If you have questions about contributing, please:
 - Open an issue with the `question` label
 - Check existing issues and discussions
 - Review the documentation in `docs/nes/README.md`, `docs/snes/README.md`, and `docs/gameboy/README.md`
+- Review test ROMs in `tests/nes/README.md` (and `tests/snes/`, `tests/gb/` when available)
 
 Thank you for contributing to S-NES-BOY!

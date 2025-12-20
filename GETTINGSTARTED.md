@@ -120,6 +120,7 @@ make clean     # Remove build outputs
 Examples are under `examples/`:
 
 - `examples/nes/hello_world`
+- `examples/nes/prng_6502_example`
 - `examples/snes/hello_world`
 - `examples/gameboy/hello_world`
 
@@ -129,6 +130,16 @@ From any example directory:
 make
 make run
 ```
+
+## Test ROMs
+
+Test ROMs for hardware verification and emulator validation are under `tests/`:
+
+- `tests/nes/` - Comprehensive NES test ROM collection (CPU, PPU, APU, mapper, timing tests)
+- `tests/snes/` - SNES test ROMs (directory structure ready)
+- `tests/gb/` - Game Boy test ROMs (directory structure ready)
+
+See [`tests/nes/README.md`](tests/nes/README.md) for detailed information about NES test ROMs.
 
 ## Documentation
 
@@ -143,7 +154,7 @@ Refer to each system’s `README.md` in its `docs/<system>/` directory for readi
 ## References
 
 - `README.md` – Framework overview
-- `DIRECTORY_STRUCTURE.md` – High-level directory layout
 - `docs/nes/README.md` – NES documentation index
 - `docs/snes/README.md` – SNES documentation index
 - `docs/gameboy/README.md` – Game Boy documentation index
+- `tests/nes/README.md` – NES test ROMs catalog
